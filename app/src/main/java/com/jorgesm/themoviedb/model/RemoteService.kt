@@ -1,6 +1,7 @@
-package com.jorgesm.themoviedb
+package com.jorgesm.themoviedb.model
 
 
+import com.jorgesm.themoviedb.Constans
 import retrofit2.http.GET
 import retrofit2.http.Query
 

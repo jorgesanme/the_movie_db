@@ -2,18 +2,19 @@ package com.jorgesm.themoviedb.ui
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.jorgesm.themoviedb.Movie
+import com.jorgesm.themoviedb.model.Movie
 import com.jorgesm.themoviedb.R
 import com.jorgesm.themoviedb.databinding.ItemMovieBinding
 import com.jorgesm.themoviedb.utils.Constants
+import com.jorgesm.themoviedb.utils.basicDiffUtil
 import com.jorgesm.themoviedb.utils.inflate
 import com.jorgesm.themoviedb.utils.loadUrl
 
 class MoviesAdapter(
-    private val moviesList: List<Movie>,
     private val listener: (Movie)-> Unit
-):RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
+):ListAdapter<Movie,MoviesAdapter.ViewHolder>(basicDiffUtil { old, new  -> old.id == new.id  }) {
     
     
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -21,11 +22,11 @@ class MoviesAdapter(
         return ViewHolder(view)
     }
     
-    override fun getItemCount(): Int = moviesList.size
-    
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind( moviesList[position])
+        val movie = getItem(position)
+        holder.bind(movie)
     }
+    
     inner class ViewHolder(view:View): RecyclerView.ViewHolder(view){
         private val binding = ItemMovieBinding.bind(view)
         fun bind(movie: Movie){
@@ -35,7 +36,5 @@ class MoviesAdapter(
                 itemView.setOnClickListener{listener(movie)}
             }
         }
-        
     }
-    
 }

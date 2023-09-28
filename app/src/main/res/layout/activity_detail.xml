@@ -22,6 +22,7 @@
 
             <ImageView
                 android:id="@+id/detail_image"
+                android:contentDescription="@string/talk_back_movie_poster"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
@@ -57,7 +58,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 tools:text="Lorem ipsum" />
 
-            <TextView
+            <com.jorgesm.themoviedb.ui.MovieDetailTextInfoView
                 android:id="@+id/movie_detail_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
