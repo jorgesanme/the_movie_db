@@ -1,6 +1,6 @@
 package com.jorgesm.themoviedb.model
 
-import com.jorgesm.themoviedb.Constans
+import com.jorgesm.themoviedb.utils.Constants
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -16,7 +16,7 @@ object RemoteConnection {
     }
 
     private val builder = Retrofit.Builder()
-        .baseUrl(Constans.BASE_URL)
+        .baseUrl(Constants.BASE_URL)
         .client(okHttpClient)
         .addConverterFactory(GsonConverterFactory.create())
         .build()

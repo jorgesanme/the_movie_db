@@ -1,4 +1,4 @@
-package com.jorgesm.themoviedb.ui
+package com.jorgesm.themoviedb.ui.detail
 
 import android.annotation.SuppressLint
 import android.os.Bundle

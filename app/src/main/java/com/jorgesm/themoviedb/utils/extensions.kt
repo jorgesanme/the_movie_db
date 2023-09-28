@@ -1,9 +1,11 @@
 package com.jorgesm.themoviedb.utils
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.Glide
@@ -15,7 +17,9 @@ fun ImageView.loadUrl(url: String) {
 
 fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = true): View =
     LayoutInflater.from(context).inflate(layoutRes, this, attachToRoot)
-
+fun Context.toast(message: String){
+    Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+}
 inline fun <T> basicDiffUtil(
     crossinline areItemsTheSame: (T, T) -> Boolean = { old, new -> old == new },
     crossinline areContentsTheSame: (T, T) -> Boolean = { old, new -> old == new }

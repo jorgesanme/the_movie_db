@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".ui.MainActivity">
+    tools:context=".ui.main.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -58,7 +58,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 tools:text="Lorem ipsum" />
 
-            <com.jorgesm.themoviedb.ui.MovieDetailTextInfoView
+            <com.jorgesm.themoviedb.ui.detail.MovieDetailTextInfoView
                 android:id="@+id/movie_detail_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -1,4 +1,4 @@
-package com.jorgesm.themoviedb.ui
+package com.jorgesm.themoviedb.ui.main
 
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +14,7 @@ import com.jorgesm.themoviedb.utils.loadUrl
 
 class MoviesAdapter(
     private val listener: (Movie)-> Unit
-):ListAdapter<Movie,MoviesAdapter.ViewHolder>(basicDiffUtil { old, new  -> old.id == new.id  }) {
+):ListAdapter<Movie, MoviesAdapter.ViewHolder>(basicDiffUtil { old, new  -> old.id == new.id  }) {
     
     
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

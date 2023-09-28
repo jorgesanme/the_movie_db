@@ -1,4 +1,4 @@
-package com.jorgesm.themoviedb.ui
+package com.jorgesm.themoviedb.ui.detail
 
 import android.content.Context
 import android.util.AttributeSet
