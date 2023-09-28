@@ -5,36 +5,42 @@ package com.jorgesm.themoviedb.ui.main
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import androidx.lifecycle.lifecycleScope
+import androidx.activity.viewModels
 import com.jorgesm.themoviedb.databinding.ActivityMainBinding
+import com.jorgesm.themoviedb.model.Movie
 import com.jorgesm.themoviedb.utils.Constants
-import kotlinx.coroutines.launch
 import com.jorgesm.themoviedb.model.MoviesRepository
 import com.jorgesm.themoviedb.ui.detail.DetailActivity
+import com.jorgesm.themoviedb.utils.visible
 
 class MainActivity : AppCompatActivity() {
     
     private lateinit var mainBinding: ActivityMainBinding
-    
-    private val moviesRepository by lazy { MoviesRepository(this) }
-    
-    private val adapter = MoviesAdapter{
-        val intent = Intent(this, DetailActivity::class.java)
-        intent.putExtra(Constants.MOVIE, it)
-        startActivity(intent)
-    }
+    private val viewModel: MainViewModel by viewModels { MainViewModelFactory(MoviesRepository(this)) }
+    private val adapter = MoviesAdapter{ viewModel.onMovieClicked(it) }
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainBinding = ActivityMainBinding.inflate(layoutInflater).also {
             setContentView(it.root)
         }
+        setupObservable()
         mainBinding.rvCovers.adapter = adapter
-        lifecycleScope.launch{
-            mainBinding.progressCircular.visibility = View.VISIBLE
-            adapter.submitList( moviesRepository.findPopularMovies().results)
-            mainBinding.progressCircular.visibility = View.GONE
-        }
+    }
+    
+    private fun setupObservable() {
+        viewModel.state.observe(this, ::updateUI)
+    }
+    
+    private fun updateUI(state: MainViewModel.UiState) {
+        mainBinding.progressCircular.visible = state.loading
+        state.movies.let(adapter::submitList)
+        state.navigateTo?.let(::navigateTo)
+    }
+    
+    private fun navigateTo(movie: Movie){
+        val intent = Intent(this, DetailActivity::class.java)
+        intent.putExtra(Constants.MOVIE, movie)
+        startActivity(intent)
     }
 }

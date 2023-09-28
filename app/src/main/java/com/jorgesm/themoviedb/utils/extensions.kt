@@ -17,9 +17,16 @@ fun ImageView.loadUrl(url: String) {
 
 fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = true): View =
     LayoutInflater.from(context).inflate(layoutRes, this, attachToRoot)
+
 fun Context.toast(message: String){
     Toast.makeText(this, message, Toast.LENGTH_LONG).show()
 }
+
+
+var View.visible: Boolean
+    get() = visibility == View.VISIBLE
+    set(value){visibility = if(value)View.VISIBLE else View.GONE}
+
 inline fun <T> basicDiffUtil(
     crossinline areItemsTheSame: (T, T) -> Boolean = { old, new -> old == new },
     crossinline areContentsTheSame: (T, T) -> Boolean = { old, new -> old == new }
