@@ -1,15 +1,16 @@
 package com.jorgesm.themoviedb.ui.detail
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.jorgesm.themoviedb.model.Movie
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 class DetailViewModel(movie: Movie): ViewModel() {
     
-    private val _state = MutableLiveData(UiState(movie))
-    val state: LiveData<UiState> get() = _state
+    private val _state = MutableStateFlow(UiState(movie))
+    val state: StateFlow<UiState> get() = _state.asStateFlow()
     
     class UiState(val movie: Movie)
     

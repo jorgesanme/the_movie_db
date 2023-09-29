@@ -6,12 +6,17 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.jorgesm.themoviedb.databinding.ActivityMainBinding
 import com.jorgesm.themoviedb.model.Movie
 import com.jorgesm.themoviedb.utils.Constants
 import com.jorgesm.themoviedb.model.MoviesRepository
 import com.jorgesm.themoviedb.ui.detail.DetailActivity
 import com.jorgesm.themoviedb.utils.visible
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     
@@ -29,7 +34,12 @@ class MainActivity : AppCompatActivity() {
     }
     
     private fun setupObservable() {
-        viewModel.state.observe(this, ::updateUI)
+        lifecycleScope.launch {
+            // TODO: cambiar Create por Started 
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
+                viewModel.state.collect(::updateUI)
+            }
+        }
     }
     
     private fun updateUI(state: MainViewModel.UiState) {
