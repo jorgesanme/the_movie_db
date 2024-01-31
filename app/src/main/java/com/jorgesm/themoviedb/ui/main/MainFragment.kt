@@ -15,6 +15,7 @@ import com.jorgesm.themoviedb.R
 import com.jorgesm.themoviedb.databinding.FragmentMainBinding
 import com.jorgesm.themoviedb.model.Movie
 import com.jorgesm.themoviedb.model.MoviesRepository
+import com.jorgesm.themoviedb.utils.launchAndCollect
 import com.jorgesm.themoviedb.utils.visible
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -35,12 +36,15 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     }
     
     private fun setupObservable() {
-        viewLifecycleOwner.lifecycleScope.launch {
+        viewLifecycleOwner.launchAndCollect(viewModel.state){mainBinding.updateUI(it)}
+        
+        
+        /*viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.state.collect { mainBinding.updateUI(it) }
             }
-        }
-    }
+        }*/
+     }
     
     private fun FragmentMainBinding.updateUI(state: MainViewModel.UiState) {
         progressCircular.visible = state.loading
@@ -51,5 +55,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     private fun navigateTo(movie: Movie){
         val navAction = MainFragmentDirections.actionMainToDetail(movie)
         findNavController().navigate(navAction)
+        viewModel.onNavigationDone()
     }
 }

@@ -7,8 +7,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.LayoutRes
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.Glide
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 
 fun ImageView.loadUrl(url: String) {
@@ -36,4 +42,16 @@ inline fun <T> basicDiffUtil(
     
     override fun areContentsTheSame(oldItem: T, newItem: T): Boolean =
         areContentsTheSame(oldItem, newItem)
+}
+
+fun <T> LifecycleOwner.launchAndCollect(
+    flow: kotlinx.coroutines.flow.Flow <T>,
+    state: Lifecycle.State = Lifecycle.State.STARTED,
+    body: (T) -> Unit
+){
+    lifecycleScope.launch{
+        repeatOnLifecycle(state){
+            flow.collect (body)
+        }
+    }
 }

@@ -29,6 +29,9 @@ class MainViewModel(private val moviesRepository: MoviesRepository): ViewModel()
     fun onMovieClicked(movie: Movie){
         _state.value = _state.value.copy(navigateTo = movie)
     }
+    fun onNavigationDone(){
+        _state.value = _state.value.copy(navigateTo = null)
+    }
     
     data class UiState(
         val loading: Boolean = false,
