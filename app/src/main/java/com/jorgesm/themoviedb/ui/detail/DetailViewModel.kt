@@ -2,7 +2,7 @@ package com.jorgesm.themoviedb.ui.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.jorgesm.themoviedb.model.Movie
+import com.jorgesm.themoviedb.model.database.Movie
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

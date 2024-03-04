@@ -1,26 +1,26 @@
 package com.jorgesm.themoviedb.model
 
 
-import androidx.appcompat.app.AppCompatActivity
 import android.Manifest
+import android.app.Application
 import android.location.Geocoder
 import android.location.Location
 
 
-class RegionRepository(activity: AppCompatActivity) {
+class RegionRepository(application: Application) {
     companion object{
         private const val DEFAULT_REGION = "US"
     }
 
-    private val locationDataSource: LocationDataSource = PlayServicesLocationDataSource(activity)
-    private val coarsePermissionChecker = PermissionChecker(activity, Manifest.permission.ACCESS_COARSE_LOCATION)
+    private val locationDataSource: LocationDataSource = PlayServicesLocationDataSource(application)
+    private val coarsePermissionChecker = PermissionChecker(application, Manifest.permission.ACCESS_COARSE_LOCATION)
     
-    private val geocoder = Geocoder(activity)
+    private val geocoder = Geocoder(application)
     
     suspend fun findLasRegion(): String = findLastLocation().toRegion()
     
     private suspend fun findLastLocation(): Location? {
-        val success = coarsePermissionChecker.request()
+        val success = coarsePermissionChecker.check()
         return if(success) locationDataSource.findLastLocation() else null
     }
     

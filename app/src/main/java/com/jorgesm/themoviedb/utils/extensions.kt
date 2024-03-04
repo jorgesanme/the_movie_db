@@ -13,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.Glide
+import com.jorgesm.themoviedb.App
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -55,3 +56,6 @@ fun <T> LifecycleOwner.launchAndCollect(
         }
     }
 }
+
+val Context.app: App
+    get() = applicationContext as App

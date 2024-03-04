@@ -7,7 +7,7 @@ import java.io.Serializable
 
 data class RemoteResult(
     val page: Int,
-    val results: List<Movie>,
+    val results: List<RemoteMovie>,
     @SerializedName("total_pages")
     val totalPages: Int,
     @SerializedName("total_results")
@@ -15,7 +15,7 @@ data class RemoteResult(
 )
 
 
-data class Movie(
+data class RemoteMovie(
     val adult: Boolean,
     @SerializedName("backdrop_path")
     val backdropPath: String?,

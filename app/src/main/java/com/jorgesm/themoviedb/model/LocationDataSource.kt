@@ -2,6 +2,7 @@ package com.jorgesm.themoviedb.model
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Application
 import android.location.Location
 import com.google.android.gms.location.LocationServices
 import kotlinx.coroutines.suspendCancellableCoroutine
@@ -11,9 +12,9 @@ interface LocationDataSource {
     suspend fun findLastLocation(): Location?
 }
 
-class PlayServicesLocationDataSource(activity: Activity): LocationDataSource{
+class PlayServicesLocationDataSource(application: Application): LocationDataSource{
     
-    private val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(activity)
+    private val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(application)
     
     @SuppressLint("MissingPermission")
     override suspend fun findLastLocation(): Location? =

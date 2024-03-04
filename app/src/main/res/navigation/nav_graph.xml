@@ -28,6 +28,6 @@
         tools:layout="@layout/fragment_detail">
         <argument
             android:name="movie"
-            app:argType="com.jorgesm.themoviedb.model.Movie" />
+            app:argType="com.jorgesm.themoviedb.model.database.Movie" />
     </fragment>
 </navigation>

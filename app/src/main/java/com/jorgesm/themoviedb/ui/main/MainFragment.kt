@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import com.jorgesm.themoviedb.R
 import com.jorgesm.themoviedb.databinding.FragmentMainBinding
 import com.jorgesm.themoviedb.model.MoviesRepository
+import com.jorgesm.themoviedb.utils.app
 import com.jorgesm.themoviedb.utils.launchAndCollect
 import com.jorgesm.themoviedb.utils.visible
 import kotlinx.coroutines.flow.Flow
@@ -19,7 +20,7 @@ import kotlinx.coroutines.flow.map
 class MainFragment : Fragment(R.layout.fragment_main) {
     
     private val viewModel: MainViewModel by viewModels {
-        MainViewModelFactory(MoviesRepository(requireActivity() as AppCompatActivity)) }
+        MainViewModelFactory(MoviesRepository(requireActivity().app)) }
     private val adapter = MoviesAdapter{ mainState.onMovieClicked(it) }
     private lateinit var mainBinding: FragmentMainBinding
     private lateinit var mainState: MainState
