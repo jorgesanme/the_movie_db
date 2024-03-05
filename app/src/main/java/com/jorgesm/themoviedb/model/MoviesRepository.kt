@@ -5,28 +5,21 @@ import com.jorgesm.themoviedb.R
 import com.jorgesm.themoviedb.model.database.Movie
 import com.jorgesm.themoviedb.model.datasource.MovieLocalDataSource
 import com.jorgesm.themoviedb.model.datasource.MovieRemoteDataSource
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 
 class MoviesRepository(application: App) {
     
-    
+    private val regionRepository = RegionRepository(application)
     private val localDataSource = MovieLocalDataSource(application.db.movieDao())
-    private val remoteDataSource = MovieRemoteDataSource(
-        application.getString(R.string.api_key),
-        RegionRepository(application)
-    )
+    private val remoteDataSource = MovieRemoteDataSource(application.getString(R.string.api_key))
     
     val popularMovies = localDataSource.movies
-    
-    suspend fun requestPopularMovies() = withContext(Dispatchers.IO){
+    suspend fun requestPopularMovies() {
         if(localDataSource.isEmpty()){
-            val movies: RemoteResult = remoteDataSource.findPopularMovies()
+            val movies: RemoteResult = remoteDataSource.findPopularMovies(regionRepository.findLasRegion())
             localDataSource.save(movies.results.map { it.toLocalDataMovie() })
         }
     }
-    
 }
 
 
