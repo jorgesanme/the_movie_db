@@ -7,14 +7,14 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.jorgesm.themoviedb.R
 import com.jorgesm.themoviedb.model.database.Movie
 import com.jorgesm.themoviedb.databinding.FragmentDetailBinding
+import com.jorgesm.themoviedb.model.MoviesRepository
 import com.jorgesm.themoviedb.utils.Constants
+import com.jorgesm.themoviedb.utils.app
 import com.jorgesm.themoviedb.utils.loadUrl
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class DetailFragment: Fragment(R.layout.fragment_detail) {
@@ -22,7 +22,7 @@ class DetailFragment: Fragment(R.layout.fragment_detail) {
     private val safeArgs: DetailFragmentArgs by navArgs()
     
     private val viewModel: DetailViewModel by viewModels {
-        DetailViewModel.DetailViewModelFactory(requireNotNull( safeArgs.movie))
+        DetailViewModel.DetailViewModelFactory(requireNotNull( safeArgs.movieId), MoviesRepository(requireActivity().app) )
     }
     
     private lateinit var binding: FragmentDetailBinding
@@ -30,11 +30,14 @@ class DetailFragment: Fragment(R.layout.fragment_detail) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentDetailBinding.bind(view)
-        binding.movieDetailToolbar.setNavigationOnClickListener { findNavController().popBackStack() }
+        binding.movieDetailToolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
         
+        binding.movieDetailFavorite.setOnClickListener{
+            viewModel.onFavoriteClicked()
+        }
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
-                viewModel.state.collect { binding.updateUI(it.movie) }
+                viewModel.state.collect { it.movie?.let { it1 -> binding.updateUI(it1) } }
             }
         }
     }
@@ -45,5 +48,9 @@ class DetailFragment: Fragment(R.layout.fragment_detail) {
         detailImage.loadUrl(Constants.IMG_BASE_URL+Constants.IMG_780+background)
         movieDetailSummary.text = movie.overview
         movieDetailInfo.setMovieDetailText(movie)
+        val favoriteIcon = if (movie.isFavorite)R.drawable.baseline_favorite_32_red
+        else R.drawable.baseline_favorite_32
+        movieDetailFavorite.setImageResource(favoriteIcon)
+        
     }
 }

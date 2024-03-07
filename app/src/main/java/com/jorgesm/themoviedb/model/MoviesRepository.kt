@@ -14,11 +14,17 @@ class MoviesRepository(application: App) {
     private val remoteDataSource = MovieRemoteDataSource(application.getString(R.string.api_key))
     
     val popularMovies = localDataSource.movies
-    suspend fun requestPopularMovies() {
+    
+    fun findMovieById(id: Int) = localDataSource.findMovieById(id)
+    suspend fun requestPopularMovies(): Error? = tryCall {
         if(localDataSource.isEmpty()){
             val movies: RemoteResult = remoteDataSource.findPopularMovies(regionRepository.findLasRegion())
             localDataSource.save(movies.results.map { it.toLocalDataMovie() })
         }
+    }
+    suspend fun switchFavorite(movie: Movie) = tryCall {
+        val updateMovie = movie.copy(isFavorite = !movie.isFavorite)
+        localDataSource.save(listOf(updateMovie))
     }
 }
 
@@ -28,10 +34,11 @@ private fun RemoteMovie.toLocalDataMovie() = Movie(
         title = this.title,
         releaseDate = this.releaseDate,
         posterPath =this.posterPath,
-        backdropPath = this.backdropPath,
+        backdropPath = this.backdropPath ?: "",
         originalLanguage =this.originalLanguage,
         originalTitle =this.originalTitle,
         overview = this.overview,
         popularity =this.popularity,
-        voteAverage = this.voteAverage
+        voteAverage = this.voteAverage,
+        isFavorite = false
 )

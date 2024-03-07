@@ -8,6 +8,7 @@
     tools:context=".ui.main.MainFragment">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.DarkOverlay"
@@ -34,7 +35,7 @@
                 android:id="@+id/movie_detail_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:title="Movie name" />
+                app:navigationIcon="@drawable/ic_arrow_back" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -44,11 +45,22 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:transitionGroup="true">
+
+            <ImageView
+                android:id="@+id/movie_detail_favorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginVertical="4dp"
+                android:src="@drawable/baseline_favorite_32"
+                android:layout_gravity="end"
+                app:layout_anchorGravity="bottom|end"/>
 
             <TextView
                 android:id="@+id/movie_detail_summary"

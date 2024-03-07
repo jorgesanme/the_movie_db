@@ -2,4 +2,7 @@
     <string name="app_name">The Movie db</string>
     <string name="api_key">f619ebb09bf1b44a82e6b13dfdc9ad50</string>
     <string name="talk_back_movie_poster">Cartel de la peli</string>
+    <string name="connectivity_error">Ha fallado la conección a internet</string>
+    <string name="server_error">Error en el servidor:</string>
+    <string name="unknown_error">No lo entiendo, pero dice -></string>
 </resources>

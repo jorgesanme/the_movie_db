@@ -27,7 +27,8 @@
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail">
         <argument
-            android:name="movie"
-            app:argType="com.jorgesm.themoviedb.model.database.Movie" />
+            android:name="movieId"
+            app:argType="integer"
+            android:defaultValue="-1"/>
     </fragment>
 </navigation>
