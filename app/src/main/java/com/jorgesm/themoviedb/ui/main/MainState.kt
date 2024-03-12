@@ -8,7 +8,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.jorgesm.themoviedb.R
 import com.jorgesm.themoviedb.data.Error
-import com.jorgesm.themoviedb.data.database.Movie
+import com.jorgesm.themoviedb.domain.DomainMovie
 import com.jorgesm.themoviedb.ui.common.PermissionRequester
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -29,7 +29,7 @@ class MainState(
     private val navController: NavController
 ) {
     
-    fun onMovieClicked(movie: Movie){
+    fun onMovieClicked(movie: DomainMovie){
         val navAction = MainFragmentDirections.actionMainToDetail(movie.id)
         navController.navigate(navAction)
     }

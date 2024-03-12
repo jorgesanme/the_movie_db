@@ -4,10 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.jorgesm.themoviedb.data.Error
-import com.jorgesm.themoviedb.data.database.Movie
+import com.jorgesm.themoviedb.domain.DomainMovie
 import com.jorgesm.themoviedb.data.toError
-import com.jorgesm.themoviedb.domain.GetPopularMoviesUseCase
-import com.jorgesm.themoviedb.domain.RequestPopularMoviesUseCase
+import com.jorgesm.themoviedb.usecases.GetPopularMoviesUseCase
+import com.jorgesm.themoviedb.usecases.RequestPopularMoviesUseCase
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -46,7 +46,7 @@ class MainViewModel(
     
     data class UiState(
         val loading: Boolean = false,
-        val movies: List<Movie>? = null,
+        val movies: List<DomainMovie>? = null,
         val error: Error? = null
     )
 }
@@ -59,5 +59,4 @@ class MainViewModelFactory(
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return  MainViewModel(getPopularMoviesUseCase, requestPopularMoviesUseCase) as T
     }
-    
 }

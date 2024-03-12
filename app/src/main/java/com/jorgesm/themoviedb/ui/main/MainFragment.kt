@@ -9,13 +9,10 @@ import androidx.fragment.app.viewModels
 import com.jorgesm.themoviedb.R
 import com.jorgesm.themoviedb.databinding.FragmentMainBinding
 import com.jorgesm.themoviedb.data.MoviesRepository
-import com.jorgesm.themoviedb.domain.GetPopularMoviesUseCase
-import com.jorgesm.themoviedb.domain.RequestPopularMoviesUseCase
+import com.jorgesm.themoviedb.usecases.GetPopularMoviesUseCase
+import com.jorgesm.themoviedb.usecases.RequestPopularMoviesUseCase
 import com.jorgesm.themoviedb.utils.app
 import com.jorgesm.themoviedb.utils.launchAndCollect
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.map
 
 class MainFragment : Fragment(R.layout.fragment_main) {
     
@@ -50,14 +47,5 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                 text = it.error?.let(mainState::errorToString)
             }
         }
-        
      }
-    
-    
-    private fun <T,U> Flow<T>.diff(mapf: (T)-> U, body:(U)-> Unit){
-        viewLifecycleOwner.launchAndCollect(
-            flow = this.map(mapf).distinctUntilChanged(),
-            body = body
-        )
-    }
 }

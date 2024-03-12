@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
-import com.jorgesm.themoviedb.data.database.Movie
+import com.jorgesm.themoviedb.domain.DomainMovie
 
 class MovieDetailTextInfoView  @JvmOverloads constructor(
     context: Context,
@@ -13,7 +13,7 @@ class MovieDetailTextInfoView  @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ): AppCompatTextView(context, attrs, defStyleAttr){
     
-     fun setMovieDetailText(movie: Movie) = with(movie){
+     fun setMovieDetailText(movie: DomainMovie) = with(movie){
         text = buildSpannedString {
             bold { append("Original language: ") }
             appendLine(originalLanguage)

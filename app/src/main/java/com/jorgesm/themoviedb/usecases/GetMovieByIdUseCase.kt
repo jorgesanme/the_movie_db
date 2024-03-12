@@ -1,4 +1,4 @@
-package com.jorgesm.themoviedb.domain
+package com.jorgesm.themoviedb.usecases
 
 import com.jorgesm.themoviedb.data.MoviesRepository
 

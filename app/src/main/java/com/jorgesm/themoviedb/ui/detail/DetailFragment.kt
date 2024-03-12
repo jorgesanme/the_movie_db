@@ -9,11 +9,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
 import com.jorgesm.themoviedb.R
-import com.jorgesm.themoviedb.data.database.Movie
+import com.jorgesm.themoviedb.domain.DomainMovie
 import com.jorgesm.themoviedb.databinding.FragmentDetailBinding
 import com.jorgesm.themoviedb.data.MoviesRepository
-import com.jorgesm.themoviedb.domain.GetMovieByIdUseCase
-import com.jorgesm.themoviedb.domain.SetMovieFavoriteUseCase
+import com.jorgesm.themoviedb.usecases.GetMovieByIdUseCase
+import com.jorgesm.themoviedb.usecases.SetMovieFavoriteUseCase
 import com.jorgesm.themoviedb.utils.Constants
 import com.jorgesm.themoviedb.utils.app
 import com.jorgesm.themoviedb.utils.loadUrl
@@ -49,7 +49,7 @@ class DetailFragment: Fragment(R.layout.fragment_detail) {
         }
     }
     
-    private fun FragmentDetailBinding.updateUI(movie: Movie) {
+    private fun FragmentDetailBinding.updateUI(movie: DomainMovie) {
         val background = movie.backdropPath ?: movie.posterPath
         movieDetailToolbar.title = movie.title
         detailImage.loadUrl(Constants.IMG_BASE_URL+Constants.IMG_780+background)

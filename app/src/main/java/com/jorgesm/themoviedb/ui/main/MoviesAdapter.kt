@@ -4,7 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.jorgesm.themoviedb.data.database.Movie
+import com.jorgesm.themoviedb.domain.DomainMovie
 import com.jorgesm.themoviedb.R
 import com.jorgesm.themoviedb.databinding.ItemMovieBinding
 import com.jorgesm.themoviedb.utils.Constants
@@ -13,8 +13,8 @@ import com.jorgesm.themoviedb.utils.inflate
 import com.jorgesm.themoviedb.utils.loadUrl
 
 class MoviesAdapter(
-    private val listener: (Movie)-> Unit
-):ListAdapter<Movie, MoviesAdapter.ViewHolder>(basicDiffUtil { old, new  -> old.id == new.id  }) {
+    private val listener: (DomainMovie)-> Unit
+):ListAdapter<DomainMovie, MoviesAdapter.ViewHolder>(basicDiffUtil { old, new  -> old.id == new.id  }) {
     
     
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -29,7 +29,7 @@ class MoviesAdapter(
     
     inner class ViewHolder(view:View): RecyclerView.ViewHolder(view){
         private val binding = ItemMovieBinding.bind(view)
-        fun bind(movie: Movie){
+        fun bind(movie: DomainMovie){
             with(binding){
                 movieCover.loadUrl(Constants.IMG_BASE_URL+Constants.IMG_185+movie.posterPath)
                 movieTitle.text = movie.title

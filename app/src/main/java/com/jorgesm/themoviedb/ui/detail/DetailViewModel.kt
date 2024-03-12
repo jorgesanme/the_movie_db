@@ -3,9 +3,9 @@ package com.jorgesm.themoviedb.ui.detail
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.jorgesm.themoviedb.data.database.Movie
-import com.jorgesm.themoviedb.domain.GetMovieByIdUseCase
-import com.jorgesm.themoviedb.domain.SetMovieFavoriteUseCase
+import com.jorgesm.themoviedb.domain.DomainMovie
+import com.jorgesm.themoviedb.usecases.GetMovieByIdUseCase
+import com.jorgesm.themoviedb.usecases.SetMovieFavoriteUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -27,7 +27,7 @@ class DetailViewModel(
             }
         }
     }
-    class UiState(val movie: Movie? = null )
+    class UiState(val movie: DomainMovie? = null )
     
     fun onFavoriteClicked() = viewModelScope.launch {
         _state.value.movie?.let {
@@ -46,7 +46,5 @@ class DetailViewModel(
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             return DetailViewModel(movieId, getMovieByIdUseCase, setMovieFavoriteUseCase ) as T
         }
-    
     }
-    
 }
