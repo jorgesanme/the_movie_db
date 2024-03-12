@@ -7,8 +7,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.jorgesm.themoviedb.R
-import com.jorgesm.themoviedb.model.Error
-import com.jorgesm.themoviedb.model.database.Movie
+import com.jorgesm.themoviedb.data.Error
+import com.jorgesm.themoviedb.data.database.Movie
 import com.jorgesm.themoviedb.ui.common.PermissionRequester
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch

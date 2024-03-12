@@ -3,16 +3,15 @@ package com.jorgesm.themoviedb.ui.main
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.jorgesm.themoviedb.model.Error
-import com.jorgesm.themoviedb.model.MoviesRepository
-import com.jorgesm.themoviedb.model.database.Movie
-import com.jorgesm.themoviedb.model.toError
+import com.jorgesm.themoviedb.data.Error
+import com.jorgesm.themoviedb.data.MoviesRepository
+import com.jorgesm.themoviedb.data.database.Movie
+import com.jorgesm.themoviedb.data.toError
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -23,9 +22,10 @@ class MainViewModel(private val moviesRepository: MoviesRepository): ViewModel()
     init {
         viewModelScope.launch {
             _state.update { it.copy(loading = true) }
+            delay(3000)
             moviesRepository.popularMovies
-                .catch { cause -> _state.update { it.copy(error = cause.toError()) }}
-                .collect{ movies -> _state.update {  UiState(movies = movies) }
+                .catch { cause -> _state.update { it.copy( loading = false,error = cause.toError()) }}
+                .collect{ movies -> _state.update {  UiState(loading = false, movies = movies) }
             }
         }
     }

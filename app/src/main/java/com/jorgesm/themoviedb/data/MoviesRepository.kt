@@ -1,10 +1,10 @@
-package com.jorgesm.themoviedb.model
+package com.jorgesm.themoviedb.data
 
 import com.jorgesm.themoviedb.App
 import com.jorgesm.themoviedb.R
-import com.jorgesm.themoviedb.model.database.Movie
-import com.jorgesm.themoviedb.model.datasource.MovieLocalDataSource
-import com.jorgesm.themoviedb.model.datasource.MovieRemoteDataSource
+import com.jorgesm.themoviedb.data.database.Movie
+import com.jorgesm.themoviedb.data.datasource.MovieLocalDataSource
+import com.jorgesm.themoviedb.data.datasource.MovieRemoteDataSource
 
 
 class MoviesRepository(application: App) {

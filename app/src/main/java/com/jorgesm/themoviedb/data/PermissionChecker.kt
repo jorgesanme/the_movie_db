@@ -1,4 +1,4 @@
-package com.jorgesm.themoviedb.model
+package com.jorgesm.themoviedb.data
 
 import android.app.Application
 import android.content.pm.PackageManager

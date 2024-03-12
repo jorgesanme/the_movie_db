@@ -1,6 +1,6 @@
-package com.jorgesm.themoviedb.model.datasource
+package com.jorgesm.themoviedb.data.datasource
 
-import com.jorgesm.themoviedb.model.RemoteConnection
+import com.jorgesm.themoviedb.data.RemoteConnection
 
 class MovieRemoteDataSource(
     private val apiKey: String

@@ -4,14 +4,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.jorgesm.themoviedb.model.database.Movie
+import com.jorgesm.themoviedb.data.database.Movie
 import com.jorgesm.themoviedb.R
 import com.jorgesm.themoviedb.databinding.ItemMovieBinding
 import com.jorgesm.themoviedb.utils.Constants
 import com.jorgesm.themoviedb.utils.basicDiffUtil
 import com.jorgesm.themoviedb.utils.inflate
 import com.jorgesm.themoviedb.utils.loadUrl
-import com.jorgesm.themoviedb.utils.visible
 
 class MoviesAdapter(
     private val listener: (Movie)-> Unit

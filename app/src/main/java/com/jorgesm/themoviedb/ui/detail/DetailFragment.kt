@@ -9,9 +9,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
 import com.jorgesm.themoviedb.R
-import com.jorgesm.themoviedb.model.database.Movie
+import com.jorgesm.themoviedb.data.database.Movie
 import com.jorgesm.themoviedb.databinding.FragmentDetailBinding
-import com.jorgesm.themoviedb.model.MoviesRepository
+import com.jorgesm.themoviedb.data.MoviesRepository
 import com.jorgesm.themoviedb.utils.Constants
 import com.jorgesm.themoviedb.utils.app
 import com.jorgesm.themoviedb.utils.loadUrl

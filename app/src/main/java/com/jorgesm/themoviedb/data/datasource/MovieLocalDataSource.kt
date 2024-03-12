@@ -1,7 +1,7 @@
-package com.jorgesm.themoviedb.model.datasource
+package com.jorgesm.themoviedb.data.datasource
 
-import com.jorgesm.themoviedb.model.database.Movie
-import com.jorgesm.themoviedb.model.database.MovieDao
+import com.jorgesm.themoviedb.data.database.Movie
+import com.jorgesm.themoviedb.data.database.MovieDao
 import kotlinx.coroutines.flow.Flow
 
 class MovieLocalDataSource(private val movieDao: MovieDao){

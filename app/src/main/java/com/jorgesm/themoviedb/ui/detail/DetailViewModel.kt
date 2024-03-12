@@ -3,12 +3,11 @@ package com.jorgesm.themoviedb.ui.detail
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.jorgesm.themoviedb.model.MoviesRepository
-import com.jorgesm.themoviedb.model.database.Movie
+import com.jorgesm.themoviedb.data.MoviesRepository
+import com.jorgesm.themoviedb.data.database.Movie
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class DetailViewModel(

@@ -8,11 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.jorgesm.themoviedb.R
 import com.jorgesm.themoviedb.databinding.FragmentMainBinding
-import com.jorgesm.themoviedb.model.Error
-import com.jorgesm.themoviedb.model.MoviesRepository
+import com.jorgesm.themoviedb.data.MoviesRepository
 import com.jorgesm.themoviedb.utils.app
 import com.jorgesm.themoviedb.utils.launchAndCollect
-import com.jorgesm.themoviedb.utils.visible
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
