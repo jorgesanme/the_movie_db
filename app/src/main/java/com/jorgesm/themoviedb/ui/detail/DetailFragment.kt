@@ -12,6 +12,8 @@ import com.jorgesm.themoviedb.R
 import com.jorgesm.themoviedb.data.database.Movie
 import com.jorgesm.themoviedb.databinding.FragmentDetailBinding
 import com.jorgesm.themoviedb.data.MoviesRepository
+import com.jorgesm.themoviedb.domain.GetMovieByIdUseCase
+import com.jorgesm.themoviedb.domain.SetMovieFavoriteUseCase
 import com.jorgesm.themoviedb.utils.Constants
 import com.jorgesm.themoviedb.utils.app
 import com.jorgesm.themoviedb.utils.loadUrl
@@ -22,7 +24,12 @@ class DetailFragment: Fragment(R.layout.fragment_detail) {
     private val safeArgs: DetailFragmentArgs by navArgs()
     
     private val viewModel: DetailViewModel by viewModels {
-        DetailViewModel.DetailViewModelFactory(requireNotNull( safeArgs.movieId), MoviesRepository(requireActivity().app) )
+        val repository = MoviesRepository(requireActivity().app)
+        DetailViewModel.DetailViewModelFactory(
+            requireNotNull( safeArgs.movieId),
+            GetMovieByIdUseCase(repository),
+            SetMovieFavoriteUseCase(repository)
+        )
     }
     
     private lateinit var binding: FragmentDetailBinding

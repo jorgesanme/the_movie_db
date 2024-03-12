@@ -3,8 +3,9 @@ package com.jorgesm.themoviedb.ui.detail
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.jorgesm.themoviedb.data.MoviesRepository
 import com.jorgesm.themoviedb.data.database.Movie
+import com.jorgesm.themoviedb.domain.GetMovieByIdUseCase
+import com.jorgesm.themoviedb.domain.SetMovieFavoriteUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -12,7 +13,8 @@ import kotlinx.coroutines.launch
 
 class DetailViewModel(
     movieId: Int,
-    private val repository: MoviesRepository
+    getMovieByIdUseCase: GetMovieByIdUseCase,
+    private val setMovieFavoriteUseCase: SetMovieFavoriteUseCase
 ): ViewModel() {
     
     private val _state = MutableStateFlow(UiState())
@@ -20,7 +22,7 @@ class DetailViewModel(
     
     init {
         viewModelScope.launch {
-            repository.findMovieById(movieId).collect{ movie ->
+            getMovieByIdUseCase(movieId).collect{ movie ->
                 _state.value = UiState(movie)
             }
         }
@@ -29,16 +31,20 @@ class DetailViewModel(
     
     fun onFavoriteClicked() = viewModelScope.launch {
         _state.value.movie?.let {
-            repository.switchFavorite(it)
+            setMovieFavoriteUseCase(it)
         }
     }
     
     
     @Suppress("UNCHECKED_CAST")
-    class DetailViewModelFactory(private val movieId: Int, private val repository: MoviesRepository ):
+    class DetailViewModelFactory(
+        private val movieId: Int,
+        private val getMovieByIdUseCase: GetMovieByIdUseCase,
+        private val setMovieFavoriteUseCase: SetMovieFavoriteUseCase
+    ):
         ViewModelProvider.Factory{
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return DetailViewModel(movieId, repository ) as T
+            return DetailViewModel(movieId, getMovieByIdUseCase, setMovieFavoriteUseCase ) as T
         }
     
     }
