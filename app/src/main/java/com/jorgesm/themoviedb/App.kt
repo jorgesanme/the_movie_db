@@ -2,7 +2,7 @@ package com.jorgesm.themoviedb
 
 import android.app.Application
 import androidx.room.Room
-import com.jorgesm.themoviedb.data.database.MovieDataBase
+import com.jorgesm.themoviedb.framework.database.MovieDataBase
 
 class App: Application() {
     lateinit var db: MovieDataBase

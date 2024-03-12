@@ -1,18 +1,14 @@
-package com.jorgesm.themoviedb.data
+package com.jorgesm.themoviedb.framework.datasource
 
 import android.annotation.SuppressLint
 import android.app.Application
 import android.location.Location
 import com.google.android.gms.location.LocationServices
+import com.jorgesm.themoviedb.data.datasource.LocationDataSource
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 
-interface LocationDataSource {
-    suspend fun findLastLocation(): Location?
-}
-
-class PlayServicesLocationDataSource(application: Application): LocationDataSource{
-    
+class PlayServicesLocationDataSource(application: Application): LocationDataSource {
     private val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(application)
     
     @SuppressLint("MissingPermission")
@@ -23,5 +19,4 @@ class PlayServicesLocationDataSource(application: Application): LocationDataSour
                     continuation.resume(it.result)
                 }
         }
-    
 }

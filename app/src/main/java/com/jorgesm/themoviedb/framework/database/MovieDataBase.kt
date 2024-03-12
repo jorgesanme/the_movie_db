@@ -1,4 +1,4 @@
-package com.jorgesm.themoviedb.data.database
+package com.jorgesm.themoviedb.framework.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

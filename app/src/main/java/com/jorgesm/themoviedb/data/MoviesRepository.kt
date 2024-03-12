@@ -3,15 +3,15 @@ package com.jorgesm.themoviedb.data
 import com.jorgesm.themoviedb.App
 import com.jorgesm.themoviedb.R
 import com.jorgesm.themoviedb.domain.DomainMovie
-import com.jorgesm.themoviedb.data.datasource.MovieLocalDataSource
-import com.jorgesm.themoviedb.data.datasource.MovieRemoteDataSource
+import com.jorgesm.themoviedb.framework.datasource.MovieRoomDataSource
+import com.jorgesm.themoviedb.framework.datasource.MovieServerDataSource
 
 
 class MoviesRepository(application: App) {
     
     private val regionRepository = RegionRepository(application)
-    private val localDataSource = MovieLocalDataSource(application.db.movieDao())
-    private val remoteDataSource = MovieRemoteDataSource(application.getString(R.string.api_key))
+    private val localDataSource = MovieRoomDataSource(application.db.movieDao())
+    private val remoteDataSource = MovieServerDataSource(application.getString(R.string.api_key))
     
     val popularMovies = localDataSource.movies
     

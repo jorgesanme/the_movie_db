@@ -1,6 +1,6 @@
 package com.jorgesm.themoviedb.domain
 
-import com.jorgesm.themoviedb.data.database.Movie
+import com.jorgesm.themoviedb.framework.database.Movie
 
 fun List<Movie>.toDomainModel(): List<DomainMovie> = map { it.toDomainModel() }
 fun Movie.toDomainModel(): DomainMovie = DomainMovie (
