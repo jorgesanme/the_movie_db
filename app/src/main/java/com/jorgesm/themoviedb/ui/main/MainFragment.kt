@@ -1,7 +1,6 @@
 package com.jorgesm.themoviedb.ui.main
 
 
-
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -9,6 +8,9 @@ import androidx.fragment.app.viewModels
 import com.jorgesm.themoviedb.R
 import com.jorgesm.themoviedb.databinding.FragmentMainBinding
 import com.jorgesm.themoviedb.data.MoviesRepository
+import com.jorgesm.themoviedb.data.RegionRepository
+import com.jorgesm.themoviedb.framework.datasource.MovieRoomDataSource
+import com.jorgesm.themoviedb.framework.datasource.MovieServerDataSource
 import com.jorgesm.themoviedb.usecases.GetPopularMoviesUseCase
 import com.jorgesm.themoviedb.usecases.RequestPopularMoviesUseCase
 import com.jorgesm.themoviedb.utils.app
@@ -17,7 +19,10 @@ import com.jorgesm.themoviedb.utils.launchAndCollect
 class MainFragment : Fragment(R.layout.fragment_main) {
     
     private val viewModel: MainViewModel by viewModels {
-        val repository = MoviesRepository(requireActivity().app)
+        val regionRepository = RegionRepository(requireActivity().app)
+        val localDataSource = MovieRoomDataSource(requireActivity().app.db.movieDao())
+        val remoteDataSource = MovieServerDataSource(getString(R.string.api_key))
+        val repository = MoviesRepository(regionRepository,localDataSource,remoteDataSource)
         MainViewModelFactory(
             GetPopularMoviesUseCase(repository),
             RequestPopularMoviesUseCase(repository)

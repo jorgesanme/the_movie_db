@@ -12,6 +12,9 @@ import com.jorgesm.themoviedb.R
 import com.jorgesm.themoviedb.domain.DomainMovie
 import com.jorgesm.themoviedb.databinding.FragmentDetailBinding
 import com.jorgesm.themoviedb.data.MoviesRepository
+import com.jorgesm.themoviedb.data.RegionRepository
+import com.jorgesm.themoviedb.framework.datasource.MovieRoomDataSource
+import com.jorgesm.themoviedb.framework.datasource.MovieServerDataSource
 import com.jorgesm.themoviedb.usecases.GetMovieByIdUseCase
 import com.jorgesm.themoviedb.usecases.SetMovieFavoriteUseCase
 import com.jorgesm.themoviedb.utils.Constants
@@ -24,7 +27,10 @@ class DetailFragment: Fragment(R.layout.fragment_detail) {
     private val safeArgs: DetailFragmentArgs by navArgs()
     
     private val viewModel: DetailViewModel by viewModels {
-        val repository = MoviesRepository(requireActivity().app)
+        val regionRepository = RegionRepository(requireActivity().app)
+        val localDataSource = MovieRoomDataSource(requireActivity().app.db.movieDao())
+        val remoteDataSource = MovieServerDataSource(getString(R.string.api_key))
+        val repository = MoviesRepository(regionRepository, localDataSource, remoteDataSource)
         DetailViewModel.DetailViewModelFactory(
             requireNotNull( safeArgs.movieId),
             GetMovieByIdUseCase(repository),
@@ -58,6 +64,5 @@ class DetailFragment: Fragment(R.layout.fragment_detail) {
         val favoriteIcon = if (movie.isFavorite)R.drawable.baseline_favorite_32_red
         else R.drawable.baseline_favorite_32
         movieDetailFavorite.setImageResource(favoriteIcon)
-        
     }
 }
