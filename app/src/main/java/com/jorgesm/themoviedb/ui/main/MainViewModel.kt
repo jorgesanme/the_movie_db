@@ -3,12 +3,11 @@ package com.jorgesm.themoviedb.ui.main
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.jorgesm.themoviedb.data.Error
+import com.jorgesm.themoviedb.domain.Error
 import com.jorgesm.themoviedb.domain.DomainMovie
-import com.jorgesm.themoviedb.data.toError
+import com.jorgesm.themoviedb.domain.toError
 import com.jorgesm.themoviedb.usecases.GetPopularMoviesUseCase
 import com.jorgesm.themoviedb.usecases.RequestPopularMoviesUseCase
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -26,7 +25,6 @@ class MainViewModel(
     init {
         viewModelScope.launch {
             _state.update { it.copy(loading = true) }
-            delay(3000)
             getPopularMoviesUseCase()
                 .catch { cause -> _state.update { it.copy( loading = false,error = cause.toError()) }}
                 .collect{ movies -> _state.update {  UiState(loading = false, movies = movies) }

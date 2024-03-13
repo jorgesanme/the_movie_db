@@ -1,7 +1,6 @@
-package com.jorgesm.themoviedb.framework.datasource
+package com.jorgesm.themoviedb.framework.database
 
 import com.jorgesm.themoviedb.data.datasource.MovieLocalDataSource
-import com.jorgesm.themoviedb.framework.database.MovieDao
 import com.jorgesm.themoviedb.domain.DomainMovie
 import com.jorgesm.themoviedb.domain.toDBModel
 import com.jorgesm.themoviedb.domain.toDomainModel

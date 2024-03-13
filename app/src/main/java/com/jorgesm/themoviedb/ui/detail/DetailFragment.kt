@@ -13,8 +13,8 @@ import com.jorgesm.themoviedb.domain.DomainMovie
 import com.jorgesm.themoviedb.databinding.FragmentDetailBinding
 import com.jorgesm.themoviedb.data.MoviesRepository
 import com.jorgesm.themoviedb.data.RegionRepository
-import com.jorgesm.themoviedb.framework.datasource.MovieRoomDataSource
-import com.jorgesm.themoviedb.framework.datasource.MovieServerDataSource
+import com.jorgesm.themoviedb.framework.database.MovieRoomDataSource
+import com.jorgesm.themoviedb.framework.server.MovieServerDataSource
 import com.jorgesm.themoviedb.usecases.GetMovieByIdUseCase
 import com.jorgesm.themoviedb.usecases.SetMovieFavoriteUseCase
 import com.jorgesm.themoviedb.utils.Constants

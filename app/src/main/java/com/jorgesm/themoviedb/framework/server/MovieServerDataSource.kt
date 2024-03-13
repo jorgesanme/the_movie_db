@@ -1,7 +1,5 @@
-package com.jorgesm.themoviedb.framework.datasource
+package com.jorgesm.themoviedb.framework.server
 
-import com.jorgesm.themoviedb.data.RemoteConnection
-import com.jorgesm.themoviedb.data.RemoteMovie
 import com.jorgesm.themoviedb.data.datasource.MovieRemoteDataSource
 import com.jorgesm.themoviedb.domain.DomainMovie
 

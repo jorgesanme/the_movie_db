@@ -1,4 +1,4 @@
-package com.jorgesm.themoviedb.data
+package com.jorgesm.themoviedb.domain
 
 import okio.IOException
 import retrofit2.HttpException
@@ -12,7 +12,7 @@ sealed interface Error {
 fun Throwable.toError(): Error = when (this){
     is IOException -> Error.Connectivity
     is HttpException -> Error.Server(code())
-    else ->Error.Unknown(message ?: "")
+    else -> Error.Unknown(message ?: "")
 }
 
 inline fun <T> tryCall(action: () -> T): Error? = try {

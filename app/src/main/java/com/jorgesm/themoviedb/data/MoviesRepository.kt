@@ -1,8 +1,10 @@
 package com.jorgesm.themoviedb.data
 
 import com.jorgesm.themoviedb.domain.DomainMovie
-import com.jorgesm.themoviedb.framework.datasource.MovieRoomDataSource
-import com.jorgesm.themoviedb.framework.datasource.MovieServerDataSource
+import com.jorgesm.themoviedb.domain.Error
+import com.jorgesm.themoviedb.domain.tryCall
+import com.jorgesm.themoviedb.framework.database.MovieRoomDataSource
+import com.jorgesm.themoviedb.framework.server.MovieServerDataSource
 
 
 class MoviesRepository(

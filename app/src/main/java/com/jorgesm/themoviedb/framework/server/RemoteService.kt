@@ -1,4 +1,4 @@
-package com.jorgesm.themoviedb.data
+package com.jorgesm.themoviedb.framework.server
 
 
 import com.jorgesm.themoviedb.utils.Constants

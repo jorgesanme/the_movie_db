@@ -6,7 +6,7 @@ import android.app.Application
 import android.location.Geocoder
 import android.location.Location
 import com.jorgesm.themoviedb.data.datasource.LocationDataSource
-import com.jorgesm.themoviedb.framework.datasource.PlayServicesLocationDataSource
+import com.jorgesm.themoviedb.framework.PlayServicesLocationDataSource
 
 
 class RegionRepository(application: Application) {

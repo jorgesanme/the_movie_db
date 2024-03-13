@@ -9,8 +9,8 @@ import com.jorgesm.themoviedb.R
 import com.jorgesm.themoviedb.databinding.FragmentMainBinding
 import com.jorgesm.themoviedb.data.MoviesRepository
 import com.jorgesm.themoviedb.data.RegionRepository
-import com.jorgesm.themoviedb.framework.datasource.MovieRoomDataSource
-import com.jorgesm.themoviedb.framework.datasource.MovieServerDataSource
+import com.jorgesm.themoviedb.framework.database.MovieRoomDataSource
+import com.jorgesm.themoviedb.framework.server.MovieServerDataSource
 import com.jorgesm.themoviedb.usecases.GetPopularMoviesUseCase
 import com.jorgesm.themoviedb.usecases.RequestPopularMoviesUseCase
 import com.jorgesm.themoviedb.utils.app

@@ -1,4 +1,4 @@
-package com.jorgesm.themoviedb.framework.datasource
+package com.jorgesm.themoviedb.framework
 
 import android.annotation.SuppressLint
 import android.app.Application
