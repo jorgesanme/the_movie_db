@@ -17,6 +17,7 @@
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/toolbar_image_250"
+            app:maxLines="2"
             app:contentScrim="?attr/colorPrimary"
             app:statusBarScrim="?attr/colorPrimaryVariant"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
