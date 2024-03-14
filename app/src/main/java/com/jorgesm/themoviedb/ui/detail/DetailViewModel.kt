@@ -3,7 +3,6 @@ package com.jorgesm.themoviedb.ui.detail
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.jorgesm.themoviedb.domain.DomainMovie
 import com.jorgesm.themoviedb.usecases.GetMovieByIdUseCase
 import com.jorgesm.themoviedb.usecases.SetMovieFavoriteUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -27,7 +26,7 @@ class DetailViewModel(
             }
         }
     }
-    class UiState(val movie: DomainMovie? = null )
+    class UiState(val movie: com.jorgesm.themoviedb.domain.DomainMovie? = null )
     
     fun onFavoriteClicked() = viewModelScope.launch {
         _state.value.movie?.let {

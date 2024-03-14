@@ -9,12 +9,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
 import com.jorgesm.themoviedb.R
-import com.jorgesm.themoviedb.domain.DomainMovie
 import com.jorgesm.themoviedb.databinding.FragmentDetailBinding
 import com.jorgesm.themoviedb.data.MoviesRepository
+import com.jorgesm.themoviedb.data.PlayServicesLocationDataSource
 import com.jorgesm.themoviedb.data.RegionRepository
-import com.jorgesm.themoviedb.framework.database.MovieRoomDataSource
-import com.jorgesm.themoviedb.framework.server.MovieServerDataSource
+import com.jorgesm.themoviedb.data.database.MovieRoomDataSource
+import com.jorgesm.themoviedb.data.server.AndroidPermissionChecker
+import com.jorgesm.themoviedb.data.server.MovieServerDataSource
 import com.jorgesm.themoviedb.usecases.GetMovieByIdUseCase
 import com.jorgesm.themoviedb.usecases.SetMovieFavoriteUseCase
 import com.jorgesm.themoviedb.utils.Constants
@@ -27,12 +28,19 @@ class DetailFragment: Fragment(R.layout.fragment_detail) {
     private val safeArgs: DetailFragmentArgs by navArgs()
     
     private val viewModel: DetailViewModel by viewModels {
-        val regionRepository = RegionRepository(requireActivity().app)
+        val application = requireActivity().app
         val localDataSource = MovieRoomDataSource(requireActivity().app.db.movieDao())
         val remoteDataSource = MovieServerDataSource(getString(R.string.api_key))
-        val repository = MoviesRepository(regionRepository, localDataSource, remoteDataSource)
+        val repository = MoviesRepository(
+            RegionRepository(
+                PlayServicesLocationDataSource(application),
+                AndroidPermissionChecker(application)
+            ),
+            localDataSource,
+            remoteDataSource
+        )
         DetailViewModel.DetailViewModelFactory(
-            requireNotNull( safeArgs.movieId),
+            requireNotNull(safeArgs.movieId),
             GetMovieByIdUseCase(repository),
             SetMovieFavoriteUseCase(repository)
         )
@@ -55,7 +63,7 @@ class DetailFragment: Fragment(R.layout.fragment_detail) {
         }
     }
     
-    private fun FragmentDetailBinding.updateUI(movie: DomainMovie) {
+    private fun FragmentDetailBinding.updateUI(movie: com.jorgesm.themoviedb.domain.DomainMovie) {
         val background = movie.backdropPath ?: movie.posterPath
         movieDetailToolbar.title = movie.title
         detailImage.loadUrl(Constants.IMG_BASE_URL+Constants.IMG_780+background)

@@ -8,9 +8,11 @@ import androidx.fragment.app.viewModels
 import com.jorgesm.themoviedb.R
 import com.jorgesm.themoviedb.databinding.FragmentMainBinding
 import com.jorgesm.themoviedb.data.MoviesRepository
+import com.jorgesm.themoviedb.data.PlayServicesLocationDataSource
 import com.jorgesm.themoviedb.data.RegionRepository
-import com.jorgesm.themoviedb.framework.database.MovieRoomDataSource
-import com.jorgesm.themoviedb.framework.server.MovieServerDataSource
+import com.jorgesm.themoviedb.data.database.MovieRoomDataSource
+import com.jorgesm.themoviedb.data.server.AndroidPermissionChecker
+import com.jorgesm.themoviedb.data.server.MovieServerDataSource
 import com.jorgesm.themoviedb.usecases.GetPopularMoviesUseCase
 import com.jorgesm.themoviedb.usecases.RequestPopularMoviesUseCase
 import com.jorgesm.themoviedb.utils.app
@@ -19,7 +21,11 @@ import com.jorgesm.themoviedb.utils.launchAndCollect
 class MainFragment : Fragment(R.layout.fragment_main) {
     
     private val viewModel: MainViewModel by viewModels {
-        val regionRepository = RegionRepository(requireActivity().app)
+        val application = requireActivity().app
+        val regionRepository = RegionRepository(
+            PlayServicesLocationDataSource(application),
+            AndroidPermissionChecker(application)
+        )
         val localDataSource = MovieRoomDataSource(requireActivity().app.db.movieDao())
         val remoteDataSource = MovieServerDataSource(getString(R.string.api_key))
         val repository = MoviesRepository(regionRepository,localDataSource,remoteDataSource)

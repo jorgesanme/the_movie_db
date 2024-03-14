@@ -3,9 +3,7 @@ package com.jorgesm.themoviedb.ui.main
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.jorgesm.themoviedb.domain.Error
-import com.jorgesm.themoviedb.domain.DomainMovie
-import com.jorgesm.themoviedb.domain.toError
+import com.jorgesm.themoviedb.data.server.toError
 import com.jorgesm.themoviedb.usecases.GetPopularMoviesUseCase
 import com.jorgesm.themoviedb.usecases.RequestPopularMoviesUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -44,8 +42,8 @@ class MainViewModel(
     
     data class UiState(
         val loading: Boolean = false,
-        val movies: List<DomainMovie>? = null,
-        val error: Error? = null
+        val movies: List<com.jorgesm.themoviedb.domain.DomainMovie>? = null,
+        val error: com.jorgesm.themoviedb.domain.Error? = null
     )
 }
 
