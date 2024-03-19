@@ -17,23 +17,13 @@ import com.jorgesm.themoviedb.usecases.GetPopularMoviesUseCase
 import com.jorgesm.themoviedb.usecases.RequestPopularMoviesUseCase
 import com.jorgesm.themoviedb.utils.app
 import com.jorgesm.themoviedb.utils.launchAndCollect
+import javax.inject.Inject
 
 class MainFragment : Fragment(R.layout.fragment_main) {
     
-    private val viewModel: MainViewModel by viewModels {
-        val application = requireActivity().app
-        val regionRepository = RegionRepository(
-            PlayServicesLocationDataSource(application),
-            AndroidPermissionChecker(application)
-        )
-        val localDataSource = MovieRoomDataSource(requireActivity().app.db.movieDao())
-        val remoteDataSource = MovieServerDataSource(getString(R.string.api_key))
-        val repository = MoviesRepository(regionRepository,localDataSource,remoteDataSource)
-        MainViewModelFactory(
-            GetPopularMoviesUseCase(repository),
-            RequestPopularMoviesUseCase(repository)
-        )
-    }
+    
+    private val viewModel: MainViewModel by viewModels { app.component.mainViewModelFactory}
+    
     private val adapter = MoviesAdapter{ mainState.onMovieClicked(it) }
     private lateinit var mainBinding: FragmentMainBinding
     private lateinit var mainState: MainState
