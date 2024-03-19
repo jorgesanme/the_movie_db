@@ -5,6 +5,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.jorgesm.themoviedb.usecases.GetMovieByIdUseCase
 import com.jorgesm.themoviedb.usecases.SetMovieFavoriteUseCase
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -34,16 +37,20 @@ class DetailViewModel(
         }
     }
     
-    
-    @Suppress("UNCHECKED_CAST")
-    class DetailViewModelFactory(
-        private val movieId: Int,
-        private val getMovieByIdUseCase: GetMovieByIdUseCase,
-        private val setMovieFavoriteUseCase: SetMovieFavoriteUseCase
-    ):
-        ViewModelProvider.Factory{
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return DetailViewModel(movieId, getMovieByIdUseCase, setMovieFavoriteUseCase ) as T
-        }
+}
+@Suppress("UNCHECKED_CAST")
+class DetailViewModelFactory @AssistedInject constructor(
+    @Assisted private val movieId: Int,
+    private val getMovieByIdUseCase: GetMovieByIdUseCase,
+    private val setMovieFavoriteUseCase: SetMovieFavoriteUseCase
+):
+    ViewModelProvider.Factory{
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        return DetailViewModel(movieId, getMovieByIdUseCase, setMovieFavoriteUseCase ) as T
     }
+}
+
+@AssistedFactory
+interface detailViewModelAssistedFactory{
+    fun create(movieId: Int): DetailViewModelFactory
 }

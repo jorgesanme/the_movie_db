@@ -4,9 +4,10 @@ import com.jorgesm.themoviedb.domain.DomainMovie
 import com.jorgesm.themoviedb.domain.Error
 import com.jorgesm.themoviedb.data.datasource.MovieLocalDataSource
 import com.jorgesm.themoviedb.data.datasource.MovieRemoteDataSource
+import javax.inject.Inject
 
 
-class MoviesRepository(
+class MoviesRepository @Inject constructor(
     private val regionRepository: RegionRepository,
     private val localDataSource: MovieLocalDataSource,
     private val remoteDataSource: MovieRemoteDataSource

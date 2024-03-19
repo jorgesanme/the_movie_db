@@ -1,19 +1,19 @@
 package com.jorgesm.themoviedb
 
 import android.app.Application
-import androidx.room.Room
-import com.jorgesm.themoviedb.data.database.MovieDataBase
+import com.jorgesm.themoviedb.di.AppComponent
+import com.jorgesm.themoviedb.di.DaggerAppComponent
 
-class App: Application() {
-    lateinit var db: MovieDataBase
+class App : Application() {
+    
+    lateinit var component: AppComponent
         private set
     
     override fun onCreate() {
         super.onCreate()
         
-        db = Room.databaseBuilder(
-             this,
-             MovieDataBase::class.java,"movie-db"
-        ).build()
+        component = DaggerAppComponent.factory().create(this)
+        
     }
+    
 }

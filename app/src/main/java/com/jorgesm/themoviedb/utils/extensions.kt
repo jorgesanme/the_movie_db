@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.LayoutRes
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
@@ -14,7 +15,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.Glide
 import com.jorgesm.themoviedb.App
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 
@@ -59,3 +59,6 @@ fun <T> LifecycleOwner.launchAndCollect(
 
 val Context.app: App
     get() = applicationContext as App
+
+val Fragment.app: App
+    get() = requireContext().app
