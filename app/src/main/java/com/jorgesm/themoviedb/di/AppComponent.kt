@@ -1,8 +1,10 @@
 package com.jorgesm.themoviedb.di
 
 import android.app.Application
-import com.jorgesm.themoviedb.ui.detail.DetailViewModelFactory
-import com.jorgesm.themoviedb.ui.main.MainViewModelFactory
+import com.jorgesm.themoviedb.ui.detail.DetailFragmentComponent
+import com.jorgesm.themoviedb.ui.detail.DetailFragmentModule
+import com.jorgesm.themoviedb.ui.main.MainFragmentComponent
+import com.jorgesm.themoviedb.ui.main.MainFragmentModule
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -12,14 +14,14 @@ import javax.inject.Singleton
     modules = [
         AppModule::class,
         DataModule::class,
-        UseCaseModule::class,
-        ViewModelsModule::class
+        UseCaseModule::class
     ]
 )
 interface AppComponent {
     
-    val mainViewModelFactory: MainViewModelFactory
-    val detailViewModelFactory: DetailViewModelFactory
+    fun plus(mainFragmentModule: MainFragmentModule): MainFragmentComponent
+    fun plus(detailFragmentModule: DetailFragmentModule): DetailFragmentComponent
+    
     @Component.Factory
     interface Factory{
         fun create(@BindsInstance application: Application): AppComponent

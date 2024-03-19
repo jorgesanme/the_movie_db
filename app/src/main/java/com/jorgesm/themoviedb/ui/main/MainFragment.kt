@@ -12,12 +12,17 @@ import com.jorgesm.themoviedb.utils.launchAndCollect
 
 class MainFragment : Fragment(R.layout.fragment_main) {
     
-    
-    private val viewModel: MainViewModel by viewModels { app.component.mainViewModelFactory}
-    
+    private val viewModel: MainViewModel by viewModels { component.mainViewModelFactory}
     private val adapter = MoviesAdapter{ mainState.onMovieClicked(it) }
+    
+    private lateinit var component: MainFragmentComponent
     private lateinit var mainBinding: FragmentMainBinding
     private lateinit var mainState: MainState
+    
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        component = app.component.plus(MainFragmentModule())
+    }
     
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
