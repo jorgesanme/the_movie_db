@@ -15,7 +15,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.Glide
 import com.jorgesm.themoviedb.App
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 

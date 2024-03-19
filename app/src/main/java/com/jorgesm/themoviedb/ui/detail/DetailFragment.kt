@@ -10,14 +10,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
 import com.jorgesm.themoviedb.R
 import com.jorgesm.themoviedb.databinding.FragmentDetailBinding
-import com.jorgesm.themoviedb.data.MoviesRepository
-import com.jorgesm.themoviedb.data.PlayServicesLocationDataSource
-import com.jorgesm.themoviedb.data.RegionRepository
-import com.jorgesm.themoviedb.data.database.MovieRoomDataSource
-import com.jorgesm.themoviedb.data.server.AndroidPermissionChecker
-import com.jorgesm.themoviedb.data.server.MovieServerDataSource
-import com.jorgesm.themoviedb.usecases.GetMovieByIdUseCase
-import com.jorgesm.themoviedb.usecases.SetMovieFavoriteUseCase
 import com.jorgesm.themoviedb.utils.Constants
 import com.jorgesm.themoviedb.utils.app
 import com.jorgesm.themoviedb.utils.loadUrl
