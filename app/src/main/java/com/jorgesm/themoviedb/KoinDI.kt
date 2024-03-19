@@ -22,9 +22,12 @@ import com.jorgesm.themoviedb.usecases.SetMovieFavoriteUseCase
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
+import org.koin.core.module.dsl.factoryOf
 import org.koin.core.qualifier.named
+import org.koin.dsl.bind
 import org.koin.dsl.module
 
 fun Application.initKoinDI(){
@@ -46,23 +49,25 @@ private val appModule = module {
     }
     
     single { get<MovieDataBase>().movieDao() }
-    factory<MovieLocalDataSource> { MovieRoomDataSource(get())}
-    factory<MovieRemoteDataSource> { MovieServerDataSource(get(named("apiKey")))}
-    factory<LocationDataSource> {  PlayServicesLocationDataSource(get())}
-    factory<PermissionChecker> {  AndroidPermissionChecker(get())}
     
-    viewModel { MainViewModel(get(), get()) }
-    viewModel { (id: Int)-> DetailViewModel(id, get(), get()) }
+    factoryOf(::MovieRoomDataSource) bind MovieLocalDataSource::class
+    factory<MovieRemoteDataSource> { MovieServerDataSource(get(named("apiKey")))}
+    
+    factoryOf(::PlayServicesLocationDataSource) bind LocationDataSource::class
+    factoryOf(::AndroidPermissionChecker) bind PermissionChecker::class
+    
+    viewModelOf(::MainViewModel)
+    viewModelOf(::DetailViewModel)
 }
 
 private val dataModule = module {
-    factory<RegionRepository> { RegionRepository(get(), get())}
-    factory<MoviesRepository> { MoviesRepository(get(), get(), get())}
+    factoryOf(::RegionRepository)
+    factoryOf(::MoviesRepository)
 }
 
 private val useCasesModule = module {
-    factory { GetMovieByIdUseCase(get())}
-    factory { GetPopularMoviesUseCase(get())}
-    factory {  RequestPopularMoviesUseCase(get())}
-    factory {  SetMovieFavoriteUseCase(get())}
+    factoryOf(::GetMovieByIdUseCase)
+    factoryOf(::GetPopularMoviesUseCase)
+    factoryOf(::RequestPopularMoviesUseCase)
+    factoryOf(::SetMovieFavoriteUseCase)
 }

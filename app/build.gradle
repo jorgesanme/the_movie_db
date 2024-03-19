@@ -72,7 +72,7 @@ dependencies {
 
     implementation 'io.arrow-kt:arrow-core:1.0.1'
 
-    implementation 'io.insert-koin:koin-android:3.1.5'
+    implementation 'io.insert-koin:koin-android:3.2.0'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
