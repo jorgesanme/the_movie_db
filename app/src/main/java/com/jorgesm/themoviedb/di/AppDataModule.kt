@@ -10,8 +10,11 @@ import com.jorgesm.themoviedb.data.server.AndroidPermissionChecker
 import com.jorgesm.themoviedb.data.server.MovieServerDataSource
 import dagger.Binds
 import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 
 @Module
+@InstallIn(SingletonComponent::class)
 abstract class AppDataModule{
     @Binds
     abstract fun bindsRemoteDataSource(remoteDataSource: MovieServerDataSource): MovieRemoteDataSource

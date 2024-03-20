@@ -6,9 +6,12 @@ import com.jorgesm.themoviedb.R
 import com.jorgesm.themoviedb.data.database.MovieDataBase
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
+@InstallIn(SingletonComponent::class)
 object AppModule {
     @Provides
     @Singleton

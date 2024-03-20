@@ -7,24 +7,18 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.jorgesm.themoviedb.R
 import com.jorgesm.themoviedb.databinding.FragmentMainBinding
-import com.jorgesm.themoviedb.utils.app
 import com.jorgesm.themoviedb.utils.launchAndCollect
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainFragment : Fragment(R.layout.fragment_main) {
-    
-    @Inject lateinit var viewModelFactory: MainViewModelFactory
     
     private lateinit var mainBinding: FragmentMainBinding
     private lateinit var mainState: MainState
     
-    private val viewModel: MainViewModel by viewModels { viewModelFactory}
+    private val viewModel: MainViewModel by viewModels()
     private val adapter = MoviesAdapter{ mainState.onMovieClicked(it) }
     
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        app.component.inject(this)
-    }
     
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
