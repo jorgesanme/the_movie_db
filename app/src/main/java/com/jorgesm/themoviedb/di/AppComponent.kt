@@ -11,11 +11,7 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(
-    modules = [
-        AppModule::class,
-        DataModule::class,
-        UseCaseModule::class
-    ]
+    modules = [AppModule::class, AppDataModule::class]
 )
 interface AppComponent {
     
