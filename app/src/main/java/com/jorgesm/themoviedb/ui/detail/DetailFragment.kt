@@ -14,18 +14,21 @@ import com.jorgesm.themoviedb.utils.Constants
 import com.jorgesm.themoviedb.utils.app
 import com.jorgesm.themoviedb.utils.loadUrl
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class DetailFragment: Fragment(R.layout.fragment_detail) {
     
     private val safeArgs: DetailFragmentArgs by navArgs()
-    private val viewModel: DetailViewModel by viewModels { component.detailViewModelFactory}
+    private val viewModel: DetailViewModel by viewModels {
+        detailViewModelAssistedFactory.create(safeArgs.movieId)
+    }
     
-    private lateinit var component: DetailFragmentComponent
+    @Inject lateinit var detailViewModelAssistedFactory: detailViewModelAssistedFactory
     private lateinit var binding: FragmentDetailBinding
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        component = app.component.plus(DetailFragmentModule(safeArgs.movieId))
+        app.component.inject(this)
     }
     
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

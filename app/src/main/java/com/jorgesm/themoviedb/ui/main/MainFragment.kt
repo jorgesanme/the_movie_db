@@ -9,19 +9,21 @@ import com.jorgesm.themoviedb.R
 import com.jorgesm.themoviedb.databinding.FragmentMainBinding
 import com.jorgesm.themoviedb.utils.app
 import com.jorgesm.themoviedb.utils.launchAndCollect
+import javax.inject.Inject
 
 class MainFragment : Fragment(R.layout.fragment_main) {
     
-    private val viewModel: MainViewModel by viewModels { component.mainViewModelFactory}
-    private val adapter = MoviesAdapter{ mainState.onMovieClicked(it) }
+    @Inject lateinit var viewModelFactory: MainViewModelFactory
     
-    private lateinit var component: MainFragmentComponent
     private lateinit var mainBinding: FragmentMainBinding
     private lateinit var mainState: MainState
     
+    private val viewModel: MainViewModel by viewModels { viewModelFactory}
+    private val adapter = MoviesAdapter{ mainState.onMovieClicked(it) }
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        component = app.component.plus(MainFragmentModule())
+        app.component.inject(this)
     }
     
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

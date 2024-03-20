@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class MainViewModel(
     private val getPopularMoviesUseCase: GetPopularMoviesUseCase,
@@ -48,7 +49,7 @@ class MainViewModel(
 }
 
 @Suppress("UNCHECKED_CAST")
-class MainViewModelFactory(
+class MainViewModelFactory @Inject constructor(
     private val getPopularMoviesUseCase: GetPopularMoviesUseCase,
     private val requestPopularMoviesUseCase: RequestPopularMoviesUseCase
 ): ViewModelProvider.Factory{
