@@ -18,13 +18,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:navigationIcon="@drawable/ic_arrow_back"
+            app:titleTextColor="@color/white"
             app:title="@string/app_name"/>
         
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="58dp">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_covers"
