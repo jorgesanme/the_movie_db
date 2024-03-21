@@ -2,11 +2,13 @@ package com.jorgesm.themoviedb.data.server
 
 import arrow.core.Either
 import com.jorgesm.themoviedb.data.datasource.MovieRemoteDataSource
+import com.jorgesm.themoviedb.di.ApiKey
 import com.jorgesm.themoviedb.domain.DomainMovie
 import com.jorgesm.themoviedb.domain.Error
+import javax.inject.Inject
 
-class MovieServerDataSource(
-    private val apiKey: String
+class MovieServerDataSource @Inject constructor(
+    @ApiKey private val apiKey: String
 ) : MovieRemoteDataSource {
     override suspend fun findPopularMovies(region: String): Either<Error, List<DomainMovie>> =
         tryCall {
