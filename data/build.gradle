@@ -17,4 +17,8 @@ dependencies {
     implementation Libs.Kotlin.Coroutines.gradlePlugin
     implementation Libs.JavaX.inject
     implementation Libs.Arrow.core
+
+    implementation Libs.Junit.junit
+    implementation Libs.Mockito.kotlin
+    implementation Libs.Mockito.inline
 }

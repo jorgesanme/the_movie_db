@@ -11,7 +11,7 @@ class RegionRepository @Inject constructor(
     private val permissionChecker: PermissionChecker
 ) {
     companion object{
-        private const val DEFAULT_REGION = "US"
+        const val DEFAULT_REGION = "US"
     }
     
     suspend fun findLasRegion(): String {
