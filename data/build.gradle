@@ -14,11 +14,12 @@ java {
 dependencies {
     implementation project(":domain")
 
-    implementation Libs.Kotlin.Coroutines.gradlePlugin
+    implementation Libs.Kotlin.Coroutines.core
     implementation Libs.JavaX.inject
     implementation Libs.Arrow.core
 
-    implementation Libs.Junit.junit
-    implementation Libs.Mockito.kotlin
-    implementation Libs.Mockito.inline
+    testImplementation project(":testShared")
+    testImplementation Libs.Junit.junit
+    testImplementation Libs.Mockito.kotlin
+    testImplementation Libs.Mockito.inline
 }

@@ -76,7 +76,14 @@ dependencies {
     implementation Libs.Arrow.core
     implementation Libs.Hilt.android
     kapt Libs.Hilt.compiler
+
+    testImplementation project(":testShared")
     testImplementation Libs.Junit.junit
+    testImplementation Libs.Mockito.kotlin
+    testImplementation Libs.Mockito.inline
+    testImplementation Libs.Kotlin.Coroutines.test
+    testImplementation Libs.turbine
+
 
 
    /* androidTestImplementation 'androidx.test.ext:junit:1.1.3'
