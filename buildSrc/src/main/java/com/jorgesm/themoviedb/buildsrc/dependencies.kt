@@ -7,7 +7,7 @@ object Libs{
     const val gradleVersionsPlugin = "com.github.ben-manes:gradle-versions-plugin:0.42.0"
     
     object Kotlin{
-        private const val version = "1.7.10"
+        private const val version = "1.9.23"
         const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
         
         object Coroutines{
@@ -57,7 +57,7 @@ object Libs{
         const val converterGson = "com.squareup.retrofit2:converter-gson:$version"
     }
     object Hilt {
-        private const val version = "2.42"
+        private const val version = "2.51"
         const val gradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:$version"
         const val android = "com.google.dagger:hilt-android:$version"
         const val compiler = "com.google.dagger:hilt-compiler:$version"
