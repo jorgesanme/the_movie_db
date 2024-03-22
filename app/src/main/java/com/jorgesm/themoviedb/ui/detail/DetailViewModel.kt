@@ -1,8 +1,8 @@
 package com.jorgesm.themoviedb.ui.detail
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.jorgesm.themoviedb.di.MovieId
 import com.jorgesm.themoviedb.usecases.GetMovieByIdUseCase
 import com.jorgesm.themoviedb.usecases.SetMovieFavoriteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,12 +14,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
-    savedStateHandle: SavedStateHandle,
+    @MovieId private val movieId: Int,
     getMovieByIdUseCase: GetMovieByIdUseCase,
     private val setMovieFavoriteUseCase: SetMovieFavoriteUseCase
 ): ViewModel() {
     
-    private val movieId = DetailFragmentArgs.fromSavedStateHandle(savedStateHandle).movieId
     private val _state = MutableStateFlow(UiState())
     val state: StateFlow<UiState> = _state.asStateFlow()
     
