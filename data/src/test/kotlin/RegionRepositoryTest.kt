@@ -33,7 +33,7 @@ class RegionRepositoryTest {
                     onBlocking { findLastLocation()} doReturn "ES"},
                 permissionChecker = mock {on { check(COARSE_LOCATION) } doReturn false}
             )
-            val defaultRegion = "ES"
+            val defaultRegion = "US"
             val region = regionRepository.findLasRegion()
             
             assertEquals(defaultRegion, region)

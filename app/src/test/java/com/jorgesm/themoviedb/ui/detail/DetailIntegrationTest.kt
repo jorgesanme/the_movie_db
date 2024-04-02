@@ -3,23 +3,19 @@ package com.jorgesm.themoviedb.ui.detail
 
 import app.cash.turbine.test
 import com.jorgesm.themoviedb.CoroutinesTestRule
-import com.jorgesm.themoviedb.data.MoviesRepository
-import com.jorgesm.themoviedb.data.RegionRepository
 import com.jorgesm.themoviedb.domain.DomainMovie
 import com.jorgesm.themoviedb.testshared.sampleMovieTest
-import com.jorgesm.themoviedb.ui.FakeLocalDataSource
-import com.jorgesm.themoviedb.ui.FakeLocationDataSource
-import com.jorgesm.themoviedb.ui.FakePermissionChecker
-import com.jorgesm.themoviedb.ui.FakeRemoteDataSource
 import com.jorgesm.themoviedb.ui.detail.DetailViewModel.UiState
+import com.jorgesm.themoviedb.ui.main.buildRepositoryWith
 import com.jorgesm.themoviedb.usecases.GetMovieByIdUseCase
 import com.jorgesm.themoviedb.usecases.SetMovieFavoriteUseCase
-import kotlinx.coroutines.cancel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import org.junit.Assert.*
 import org.junit.Rule
 
+@ExperimentalCoroutinesApi
 class DetailIntegrationTest {
     
     @get:Rule
@@ -36,20 +32,20 @@ class DetailIntegrationTest {
             assertEquals(UiState(), awaitItem())
             assertEquals(UiState(movie = sampleMovieTest.copy(2, isFavorite = false) ), awaitItem())
             assertEquals(UiState(movie = sampleMovieTest.copy(2, isFavorite = true) ), awaitItem())
+            cancel()
         }
-        cancel()
     }
     
     @Test
     fun `UI is updated with the movie on Start`():Unit = runTest {
         val viewModel = buildViewModelForTest(
-            movieId = 3,
+            movieId = 2,
             localData = listOf(sampleMovieTest.copy(1), sampleMovieTest.copy(2))
         )
         
         viewModel.state.test{
             assertEquals(UiState(), awaitItem())
-            assertEquals(UiState(movie = sampleMovieTest.copy(3,) ), awaitItem())
+            assertEquals(UiState(movie = sampleMovieTest.copy(2,) ), awaitItem())
             cancel()
         }
     }
@@ -59,13 +55,7 @@ class DetailIntegrationTest {
         localData: List<DomainMovie> = emptyList(),
         remoteData: List<DomainMovie> = emptyList(),
     ): DetailViewModel {
-        val locationDataSource = FakeLocationDataSource()
-        val permissionChecker = FakePermissionChecker()
-        val regionRepository = RegionRepository(locationDataSource, permissionChecker)
-        
-        val localDataSource = FakeLocalDataSource()
-        val remoteDataSource = FakeRemoteDataSource().apply { movies = remoteData }
-        val moviesRepository = MoviesRepository(regionRepository, localDataSource, remoteDataSource)
+        val moviesRepository = buildRepositoryWith(localData, remoteData)
         
         val getMovieByIdUseCase = GetMovieByIdUseCase(moviesRepository)
         val setMovieFavoriteUseCase = SetMovieFavoriteUseCase(moviesRepository)

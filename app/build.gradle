@@ -76,6 +76,7 @@ dependencies {
     implementation Libs.Arrow.core
     implementation Libs.Hilt.android
     kapt Libs.Hilt.compiler
+    implementation Libs.Kotlin.Coroutines.core
 
     testImplementation project(":testShared")
     testImplementation Libs.Junit.junit

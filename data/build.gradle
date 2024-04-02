@@ -15,6 +15,7 @@ dependencies {
     implementation project(":domain")
 
     implementation Libs.Kotlin.Coroutines.core
+    implementation Libs.Kotlin.Coroutines.test
     implementation Libs.JavaX.inject
     implementation Libs.Arrow.core
 

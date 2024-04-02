@@ -2,23 +2,19 @@ package com.jorgesm.themoviedb.ui.main
 
 import app.cash.turbine.test
 import com.jorgesm.themoviedb.CoroutinesTestRule
-import com.jorgesm.themoviedb.data.MoviesRepository
-import com.jorgesm.themoviedb.data.RegionRepository
 import com.jorgesm.themoviedb.domain.DomainMovie
 import com.jorgesm.themoviedb.testshared.sampleMovieTest
-import com.jorgesm.themoviedb.ui.FakeLocalDataSource
-import com.jorgesm.themoviedb.ui.FakeLocationDataSource
-import com.jorgesm.themoviedb.ui.FakePermissionChecker
-import com.jorgesm.themoviedb.ui.FakeRemoteDataSource
 import com.jorgesm.themoviedb.ui.main.MainViewModel.UiState
 import com.jorgesm.themoviedb.usecases.GetPopularMoviesUseCase
 import com.jorgesm.themoviedb.usecases.RequestPopularMoviesUseCase
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Rule
 import org.junit.Test
 import org.junit.Assert.*
 
 
+@ExperimentalCoroutinesApi
 class MainIntegrationTests {
     
     @get:Rule
@@ -49,7 +45,9 @@ class MainIntegrationTests {
         val viewModel = buildViewModelForTest(localData, remoteData)
         
         viewModel.state.test{
-            assertEquals(UiState(), awaitItem())
+            val uiState = UiState()
+            val item = awaitItem()
+            assertEquals(uiState, item)
             assertEquals(UiState(movies = localData), awaitItem())
             cancel()
         }
@@ -60,14 +58,7 @@ class MainIntegrationTests {
         localData: List<DomainMovie> = emptyList(),
         remoteData: List<DomainMovie> = emptyList(),
     ): MainViewModel {
-        val locationDataSource = FakeLocationDataSource()
-        val permissionChecker = FakePermissionChecker()
-        val regionRepository = RegionRepository(locationDataSource, permissionChecker)
-        
-        val localDataSource = FakeLocalDataSource()
-        val remoteDataSource = FakeRemoteDataSource().apply { movies = remoteData }
-        val moviesRepository = MoviesRepository(regionRepository, localDataSource, remoteDataSource)
-        
+        val moviesRepository = buildRepositoryWith(localData, remoteData)
         val getPopularMoviesUseCase = GetPopularMoviesUseCase(moviesRepository)
         val requestPopularMoviesUseCase = RequestPopularMoviesUseCase(moviesRepository)
         

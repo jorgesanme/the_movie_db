@@ -11,6 +11,7 @@ dependencies {
     implementation project(":data")
 
     implementation Libs.Kotlin.Coroutines.core
+    implementation Libs.Kotlin.Coroutines.test
     implementation Libs.JavaX.inject
 
     testImplementation project(":testShared")
