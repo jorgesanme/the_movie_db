@@ -8,11 +8,12 @@ import com.jorgesm.themoviedb.domain.Error
 import javax.inject.Inject
 
 class MovieServerDataSource @Inject constructor(
-    @ApiKey private val apiKey: String
+    @ApiKey private val apiKey: String,
+    private val  remoteService: RemoteService
 ) : MovieRemoteDataSource {
     override suspend fun findPopularMovies(region: String): Either<Error, List<DomainMovie>> =
         tryCall {
-            RemoteConnection.service
+            remoteService
                 .listPopularMovies(apiKey, region)
                 .results.map { it.mapToDomainModel() }
         }
