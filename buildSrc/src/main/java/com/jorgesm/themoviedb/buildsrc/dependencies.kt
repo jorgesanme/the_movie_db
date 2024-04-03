@@ -74,6 +74,7 @@ object Libs{
         const val gradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:$version"
         const val android = "com.google.dagger:hilt-android:$version"
         const val compiler = "com.google.dagger:hilt-compiler:$version"
+        const val test = "com.google.dagger:hilt-android-testing:$version"
     }
     object Glide {
         private const val version = "4.12.0"

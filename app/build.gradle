@@ -21,7 +21,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.jorgesm.themoviedb.di.HiltTestRunner"
     }
 
     buildTypes {
@@ -93,7 +93,7 @@ dependencies {
     androidTestImplementation Libs.AndroidX.Test.Espresso.contrib
     androidTestImplementation Libs.AndroidX.Test.runner
     androidTestImplementation Libs.AndroidX.Test.rules
-
-
+    androidTestImplementation Libs.Hilt.test
+    kaptAndroidTest Libs.Hilt.compiler
 
 }

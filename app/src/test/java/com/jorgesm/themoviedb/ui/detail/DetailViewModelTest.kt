@@ -3,7 +3,6 @@ package com.jorgesm.themoviedb.ui.detail
 import app.cash.turbine.test
 import com.jorgesm.themoviedb.CoroutinesTestRule
 import com.jorgesm.themoviedb.testshared.sampleMovieTest
-import com.jorgesm.themoviedb.ui.detail.DetailViewModel.UiState
 import com.jorgesm.themoviedb.usecases.GetMovieByIdUseCase
 import com.jorgesm.themoviedb.usecases.SetMovieFavoriteUseCase
 import kotlinx.coroutines.flow.flowOf
