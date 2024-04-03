@@ -39,7 +39,6 @@ class MainViewModelTest {
     @Test
     fun `State is update with cached content immediately`()= runTest {
         viewModel.state.test {
-//            assertEquals(UiState(), awaitItem())
             assertEquals(UiState(movies = movies), awaitItem())
             cancel()
         }
@@ -49,7 +48,6 @@ class MainViewModelTest {
     fun `Progress show when it is necessary`()= runTest {
         viewModel.onUiReady()
         viewModel.state.test {
-//            assertEquals(UiState(), awaitItem())
             assertEquals(UiState(movies = movies), awaitItem())
             assertEquals(UiState(movies = movies, loading = true), awaitItem())
             assertEquals(UiState(movies = movies, loading = false), awaitItem())

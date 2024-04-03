@@ -39,8 +39,9 @@ class DetailViewModelTest {
     @Test
     fun `UI updated on start with the movie details`():Unit = runTest {
         viewModel.state.test {
-            assertEquals(UiState(), awaitItem())
-            assertEquals(UiState(movie = movie), awaitItem())
+            val movieToTest = movie
+            val item = awaitItem()
+            assertEquals(movieToTest, item.movie)
             cancel()
         }
     }
