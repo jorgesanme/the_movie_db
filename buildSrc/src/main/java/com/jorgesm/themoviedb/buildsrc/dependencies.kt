@@ -61,8 +61,9 @@ object Libs{
         }
     }
     object OkHttp3 {
-        private const val version = "4.9.2"
+        private const val version = "4.9.3"
         const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:$version"
+        const val mockWebServer = "com.squareup.okhttp3:mockwebserver:$version"
     }
     object Retrofit {
         private const val version = "2.9.0"

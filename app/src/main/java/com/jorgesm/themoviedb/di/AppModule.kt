@@ -25,6 +25,10 @@ object AppModule {
     @ApiKey
     fun provideApiKey(application: Application): String = application.getString(R.string.api_key)
     
+    @Provides
+    @Singleton
+    @ApiUrl
+    fun provideApiUrl(): String = Constants.BASE_URL
     
     @Provides
     @Singleton
@@ -39,14 +43,14 @@ object AppModule {
     
     @Provides
     @Singleton
-    fun provideRemoteService(): RemoteService{
+    fun provideRemoteService(@ApiUrl apiUrl: String): RemoteService{
         val okHttpClient = HttpLoggingInterceptor().run {
             level = HttpLoggingInterceptor.Level.BODY
             OkHttpClient.Builder().addInterceptor(this).build()
         }
         
         return  Retrofit.Builder()
-            .baseUrl(Constants.BASE_URL)
+            .baseUrl(apiUrl)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
