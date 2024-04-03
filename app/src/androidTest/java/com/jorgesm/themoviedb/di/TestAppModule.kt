@@ -1,10 +1,11 @@
 package com.jorgesm.themoviedb.di
 
 import android.app.Application
-import com.jorgesm.themoviedb.appTestShared.FakeMovieDao
+import androidx.room.Room
 import com.jorgesm.themoviedb.appTestShared.FakeRemoteService
 import com.jorgesm.themoviedb.appTestShared.buildRemoteMovies
 import com.jorgesm.themoviedb.data.database.MovieDao
+import com.jorgesm.themoviedb.data.database.MovieDataBase
 import com.jorgesm.themoviedb.data.server.RemoteService
 import dagger.Module
 import dagger.Provides
@@ -22,7 +23,14 @@ object TestAppModule {
     
     @Provides
     @Singleton
-    fun provideMovieDao(): MovieDao = FakeMovieDao()
+    fun provideDataBase(application: Application) =  Room.inMemoryDatabaseBuilder(
+        application,
+        MovieDataBase::class.java
+    ).build()
+    
+    @Provides
+    @Singleton
+    fun provideMovieDao(db: MovieDataBase): MovieDao = db.movieDao()
     
     @Provides
     @Singleton
