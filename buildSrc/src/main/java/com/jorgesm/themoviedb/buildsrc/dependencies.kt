@@ -46,6 +46,19 @@ object Libs{
             const val testing = "androidx.room:room-testing:$version"
             
         }
+        object Test {
+            private const val version = "1.4.0"
+            const val runner = "androidx.test:runner:$version"
+            const val rules = "androidx.test:rules:$version"
+            object Ext {
+                private const val version = "1.1.3"
+                const val junit = "androidx.test.ext:junit:$version"
+            }
+            object Espresso{
+                private const val version="3.4.0"
+                const val contrib = "androidx.test.espresso:espresso-contrib:$version"
+            }
+        }
     }
     object OkHttp3 {
         private const val version = "4.9.2"

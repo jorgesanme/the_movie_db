@@ -79,6 +79,8 @@ dependencies {
     implementation Libs.Kotlin.Coroutines.core
 
     testImplementation project(":testShared")
+    testImplementation project(":appTestShared")
+
     testImplementation Libs.Junit.junit
     testImplementation Libs.Mockito.kotlin
     testImplementation Libs.Mockito.inline
@@ -86,7 +88,12 @@ dependencies {
     testImplementation Libs.turbine
 
 
+    androidTestImplementation project(":appTestShared")
+    androidTestImplementation Libs.AndroidX.Test.Ext.junit
+    androidTestImplementation Libs.AndroidX.Test.Espresso.contrib
+    androidTestImplementation Libs.AndroidX.Test.runner
+    androidTestImplementation Libs.AndroidX.Test.rules
 
-   /* androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'*/
+
+
 }

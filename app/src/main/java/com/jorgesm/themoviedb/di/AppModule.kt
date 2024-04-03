@@ -39,18 +39,18 @@ object AppModule {
     
     @Provides
     @Singleton
-    fun provideRemoteService(){
+    fun provideRemoteService(): RemoteService{
         val okHttpClient = HttpLoggingInterceptor().run {
             level = HttpLoggingInterceptor.Level.BODY
             OkHttpClient.Builder().addInterceptor(this).build()
         }
         
-        val builder = Retrofit.Builder()
+        return  Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+            .create()
         
-        val service: RemoteService = builder.create()
     }
 }

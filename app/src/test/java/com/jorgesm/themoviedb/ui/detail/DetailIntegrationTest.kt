@@ -5,15 +5,13 @@ import app.cash.turbine.test
 import com.jorgesm.themoviedb.CoroutinesTestRule
 import com.jorgesm.themoviedb.data.server.RemoteMovie
 import com.jorgesm.themoviedb.data.database.Movie as DatabaseMovie
-import com.jorgesm.themoviedb.testshared.sampleMovieTest
 import com.jorgesm.themoviedb.ui.detail.DetailViewModel.UiState
-import com.jorgesm.themoviedb.ui.main.buildDatabaseMovies
-import com.jorgesm.themoviedb.ui.main.buildRepositoryWith
+import com.jorgesm.themoviedb.appTestShared.buildDatabaseMovies
+import com.jorgesm.themoviedb.appTestShared.buildRepositoryWith
 import com.jorgesm.themoviedb.usecases.GetMovieByIdUseCase
 import com.jorgesm.themoviedb.usecases.SetMovieFavoriteUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
-import org.junit.Assert
 import org.junit.Test
 import org.junit.Assert.*
 import org.junit.Rule

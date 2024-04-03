@@ -1,4 +1,4 @@
-package com.jorgesm.themoviedb.ui.main
+package com.jorgesm.themoviedb.appTestShared
 
 import com.jorgesm.themoviedb.data.MoviesRepository
 import com.jorgesm.themoviedb.data.RegionRepository
@@ -6,11 +6,6 @@ import com.jorgesm.themoviedb.data.database.Movie as DatabaseMovie
 import com.jorgesm.themoviedb.data.database.MovieRoomDataSource
 import com.jorgesm.themoviedb.data.server.MovieServerDataSource
 import com.jorgesm.themoviedb.data.server.RemoteMovie
-import com.jorgesm.themoviedb.domain.DomainMovie
-import com.jorgesm.themoviedb.ui.FakeMovieDao
-import com.jorgesm.themoviedb.ui.FakeLocationDataSource
-import com.jorgesm.themoviedb.ui.FakePermissionChecker
-import com.jorgesm.themoviedb.ui.FakeRemoteService
 
 fun buildRepositoryWith(
     localData: List<DatabaseMovie>,

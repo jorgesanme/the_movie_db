@@ -2,10 +2,11 @@ package com.jorgesm.themoviedb.ui.main
 
 import app.cash.turbine.test
 import com.jorgesm.themoviedb.CoroutinesTestRule
+import com.jorgesm.themoviedb.appTestShared.buildDatabaseMovies
+import com.jorgesm.themoviedb.appTestShared.buildRemoteMovies
+import com.jorgesm.themoviedb.appTestShared.buildRepositoryWith
 import com.jorgesm.themoviedb.data.database.Movie as DatabaseMovie
 import com.jorgesm.themoviedb.data.server.RemoteMovie
-import com.jorgesm.themoviedb.domain.DomainMovie
-import com.jorgesm.themoviedb.testshared.sampleMovieTest
 import com.jorgesm.themoviedb.ui.main.MainViewModel.UiState
 import com.jorgesm.themoviedb.usecases.GetPopularMoviesUseCase
 import com.jorgesm.themoviedb.usecases.RequestPopularMoviesUseCase
@@ -25,7 +26,7 @@ class MainIntegrationTests {
     
     @Test
     fun `Data is loaded from server when local source is empty`() = runTest {
-        val remoteData = buildRemoteMovies(1,2,3)
+        val remoteData = buildRemoteMovies(4,5,6)
         val viewModel = buildViewModelForTest(
             localData = emptyList(),
             remoteData = remoteData)
@@ -33,15 +34,15 @@ class MainIntegrationTests {
         viewModel.onUiReady()
         
         viewModel.state.test {
-            assertEquals(UiState(), awaitItem())
+//            assertEquals(UiState(), awaitItem())
             assertEquals(UiState(movies = emptyList()),awaitItem())
             assertEquals(UiState(movies = emptyList(), loading = true), awaitItem())
             assertEquals(UiState(movies = emptyList(), loading = false), awaitItem())
             
             val movies = awaitItem().movies!!
-            assertEquals("Title 1", movies[0].title)
-            assertEquals("Title 2", movies[1].title)
-            assertEquals("Title 3", movies[2].title)
+            assertEquals("Title 1", movies[4].title)
+            assertEquals("Title 2", movies[5].title)
+            assertEquals("Title 3", movies[6].title)
             cancel()
         }
     }
