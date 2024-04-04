@@ -2,7 +2,13 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="MainInstrumentationTest (1)">
+        <State />
+      </entry>
       <entry key="app">
+        <State />
+      </entry>
+      <entry key="check_mock_server_in_working()">
         <State />
       </entry>
     </value>

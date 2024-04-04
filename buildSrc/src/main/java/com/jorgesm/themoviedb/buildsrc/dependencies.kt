@@ -55,7 +55,7 @@ object Libs{
                 const val junit = "androidx.test.ext:junit:$version"
             }
             object Espresso{
-                private const val version="3.4.0"
+                private const val version="3.3.0"
                 const val contrib = "androidx.test.espresso:espresso-contrib:$version"
             }
         }
