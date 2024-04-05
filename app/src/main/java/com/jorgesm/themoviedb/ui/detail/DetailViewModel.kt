@@ -3,6 +3,7 @@ package com.jorgesm.themoviedb.ui.detail
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jorgesm.themoviedb.di.MovieId
+import com.jorgesm.themoviedb.domain.DomainMovie
 import com.jorgesm.themoviedb.usecases.GetMovieByIdUseCase
 import com.jorgesm.themoviedb.usecases.SetMovieFavoriteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -30,7 +31,7 @@ class DetailViewModel @Inject constructor(
         }
     }
     
-    class UiState(val movie: com.jorgesm.themoviedb.domain.DomainMovie? = null )
+    data class UiState(val movie: DomainMovie? = null )
     
     fun onFavoriteClicked() = viewModelScope.launch {
         _state.value.movie?.let {

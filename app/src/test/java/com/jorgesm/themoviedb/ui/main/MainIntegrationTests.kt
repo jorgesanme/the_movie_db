@@ -34,15 +34,15 @@ class MainIntegrationTests {
         viewModel.onUiReady()
         
         viewModel.state.test {
-//            assertEquals(UiState(), awaitItem())
-            assertEquals(UiState(movies = emptyList()),awaitItem())
+            assertEquals(UiState(movies = null),awaitItem())
+            assertEquals(UiState(movies = emptyList(), loading = false), awaitItem())
             assertEquals(UiState(movies = emptyList(), loading = true), awaitItem())
             assertEquals(UiState(movies = emptyList(), loading = false), awaitItem())
-            
-            val movies = awaitItem().movies!!
-            assertEquals("Title 1", movies[4].title)
-            assertEquals("Title 2", movies[5].title)
-            assertEquals("Title 3", movies[6].title)
+            val uiState = awaitItem()
+            val movies = uiState.movies!!
+            assertEquals("Title 4", movies[0].title)
+            assertEquals("Title 5", movies[1].title)
+            assertEquals("Title 6", movies[2].title)
             cancel()
         }
     }
@@ -54,9 +54,7 @@ class MainIntegrationTests {
         val viewModel = buildViewModelForTest(localData, remoteData)
         
         viewModel.state.test{
-            val uiState = UiState()
-            val item = awaitItem()
-            assertEquals(uiState, item)
+            assertEquals(UiState(movies = null),awaitItem())
             
             val movies = awaitItem().movies!!
             assertEquals("Title 1", movies[0].title)

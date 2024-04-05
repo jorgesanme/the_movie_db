@@ -81,7 +81,7 @@ class MainInstrumentationTest {
                     1,ViewActions.click()
                 )
             )
-        Thread.sleep(4_000)
+        Thread.sleep(5_000)
         onView(withId(R.id.movie_detail_toolbar))
             .check(matches(ViewMatchers.hasDescendant(withText("Uncharted"))))
     }

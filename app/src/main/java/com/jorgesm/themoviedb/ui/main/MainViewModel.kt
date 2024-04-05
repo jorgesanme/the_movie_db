@@ -26,7 +26,6 @@ class MainViewModel @Inject constructor(
     val state: StateFlow<UiState> = _state.asStateFlow()
     init {
         viewModelScope.launch {
-            _state.update { it.copy(loading = true) }
             getPopularMoviesUseCase()
                 .catch { cause -> _state.update { it.copy( loading = false,error = cause.toError()) }}
                 .collect{ movies -> _state.update {  UiState(loading = false, movies = movies) }
@@ -39,7 +38,7 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             _state.value = _state.value.copy(loading = true)
             val error = requestPopularMoviesUseCase()
-            _state.value = _state.value.copy( loading = false,error = error)
+            _state.value = _state.value.copy( loading = false, error = error)
         }
     }
     
