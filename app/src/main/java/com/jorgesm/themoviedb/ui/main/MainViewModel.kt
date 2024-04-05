@@ -3,6 +3,8 @@ package com.jorgesm.themoviedb.ui.main
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jorgesm.themoviedb.data.server.toError
+import com.jorgesm.themoviedb.domain.DomainMovie
+import com.jorgesm.themoviedb.domain.Error
 import com.jorgesm.themoviedb.usecases.GetPopularMoviesUseCase
 import com.jorgesm.themoviedb.usecases.RequestPopularMoviesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,7 +26,6 @@ class MainViewModel @Inject constructor(
     val state: StateFlow<UiState> = _state.asStateFlow()
     init {
         viewModelScope.launch {
-            _state.update { it.copy(loading = true) }
             getPopularMoviesUseCase()
                 .catch { cause -> _state.update { it.copy( loading = false,error = cause.toError()) }}
                 .collect{ movies -> _state.update {  UiState(loading = false, movies = movies) }
@@ -37,14 +38,14 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             _state.value = _state.value.copy(loading = true)
             val error = requestPopularMoviesUseCase()
-            _state.update { it.copy( loading = false,error = error)}
+            _state.value = _state.value.copy( loading = false, error = error)
         }
     }
     
     
     data class UiState(
         val loading: Boolean = false,
-        val movies: List<com.jorgesm.themoviedb.domain.DomainMovie>? = null,
-        val error: com.jorgesm.themoviedb.domain.Error? = null
+        val movies: List<DomainMovie>? = null,
+        val error: Error? = null
     )
 }

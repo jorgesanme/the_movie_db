@@ -1,17 +1,26 @@
+import com.jorgesm.themoviedb.buildsrc.Libs
+
 plugins {
     id 'java-library'
     id 'org.jetbrains.kotlin.jvm'
+    id 'org.jetbrains.kotlin.kapt'
 }
 
 dependencies {
     implementation project(":domain")
     implementation project(":data")
 
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0'
-    implementation 'javax.inject:javax.inject:1'
+    implementation Libs.Kotlin.Coroutines.core
+    implementation Libs.Kotlin.Coroutines.test
+    implementation Libs.JavaX.inject
+
+    testImplementation project(":testShared")
+    implementation Libs.Junit.junit
+    implementation Libs.Mockito.kotlin
+    implementation Libs.Mockito.inline
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
