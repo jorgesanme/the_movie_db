@@ -22,6 +22,9 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "com.jorgesm.themoviedb.di.HiltTestRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
     }
 
     buildTypes {
@@ -40,6 +43,15 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.5.13'
+    }
+    packaging {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
     }
 }
 
@@ -67,6 +79,18 @@ dependencies {
     implementation Libs.Retrofit.retrofit
     implementation Libs.Retrofit.converterGson
     implementation Libs.Glide.glide
+
+    implementation Libs.AndroidX.Compose.activityCompose
+    implementation platform(Libs.AndroidX.Compose.composeBom)
+    implementation Libs.AndroidX.Compose.UI.ui
+
+    implementation Libs.AndroidX.Compose.UI.ToolingPreview
+    implementation Libs.AndroidX.Compose.Material3
+    implementation Libs.AndroidX.Compose.MaterialIconsExtended
+    androidTestImplementation platform(Libs.AndroidX.Compose.composeBom)
+    androidTestImplementation Libs.AndroidX.Compose.UiTestJunit4
+    debugImplementation Libs.AndroidX.Compose.UI.ToolingPreview
+    debugImplementation Libs.AndroidX.Compose.UiTestManifest
     kapt Libs.Glide.compiler
     implementation Libs.playServicesLocation
     implementation Libs.AndroidX.Room.runtime

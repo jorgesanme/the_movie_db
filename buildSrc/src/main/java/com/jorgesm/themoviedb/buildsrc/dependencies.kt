@@ -27,6 +27,24 @@ object Libs{
             private const val version = "1.4.0"
             const val ktx = "androidx.activity:activity-ktx:$version"
         }
+        object Compose {
+            private const val compose = "1.8.0"
+            private const val composeBomVersion = "2024.04.01"
+            const val activityCompose = "androidx.activity:activity-compose:$compose"
+            const val composeBom = "androidx.compose:compose-bom:$composeBomVersion"
+
+            object UI {
+                const val ui = "androidx.compose.ui:ui"
+                const val ToolingPreview = "androidx.compose.ui:ui-tooling-preview"
+                const val UiGraphics = "androidx.compose.ui:ui-ui-graphics"
+            }
+            const val tooling="androidx.compose.ui:ui-tooling"
+            const val Material3 = "androidx.compose.material3:material3"
+            const val MaterialIconsExtended = "androidx.compose.material:material-icons-extended"
+            const val UiTestJunit4= "androidx.compose.ui:ui-test-junit4"
+            const val UiTestManifest="androidx.compose.ui:ui-test-manifest"
+
+        }
         object Lifecycle{
             private const val version = "2.4.1"
             const val runtimeKtx ="androidx.lifecycle:lifecycle-runtime-ktx:$version"
