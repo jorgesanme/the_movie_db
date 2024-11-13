@@ -6,4 +6,7 @@
     <string name="server_error">Error en el servidor:</string>
     <string name="unknown_error">No lo entiendo, pero dice -></string>
     <string name="title_activity_main">MainActivityCompose</string>
+    <string name="talk_back_previous_screen">Back to previous screen</string>
+    <string name="talk_back_favorite_icon">Favorite icon</string>
+
 </resources>

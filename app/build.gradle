@@ -83,8 +83,12 @@ dependencies {
     implementation Libs.AndroidX.Compose.activityCompose
     implementation platform(Libs.AndroidX.Compose.composeBom)
     implementation Libs.AndroidX.Compose.UI.ui
+    implementation Libs.Coil.compose
+    implementation Libs.AndroidX.Lifecycle.viewModelCompose
+    implementation Libs.Hilt.navigationCompose
 
     implementation Libs.AndroidX.Compose.UI.ToolingPreview
+    implementation Libs.AndroidX.Compose.UI.UiGraphics
     implementation Libs.AndroidX.Compose.Material3
     implementation Libs.AndroidX.Compose.MaterialIconsExtended
     androidTestImplementation platform(Libs.AndroidX.Compose.composeBom)

@@ -22,6 +22,7 @@ object Libs{
         const val material = "com.google.android.material:material:1.5.0"
         const val constraintlayout = "androidx.constraintlayout:constraintlayout:2.1.3"
         const val recyclerView = "androidx.recyclerview:recyclerview:1.2.1"
+
         
         object Activity {
             private const val version = "1.4.0"
@@ -36,7 +37,7 @@ object Libs{
             object UI {
                 const val ui = "androidx.compose.ui:ui"
                 const val ToolingPreview = "androidx.compose.ui:ui-tooling-preview"
-                const val UiGraphics = "androidx.compose.ui:ui-ui-graphics"
+                const val UiGraphics = "androidx.compose.ui:ui-graphics"
             }
             const val tooling="androidx.compose.ui:ui-tooling"
             const val Material3 = "androidx.compose.material3:material3"
@@ -47,8 +48,10 @@ object Libs{
         }
         object Lifecycle{
             private const val version = "2.4.1"
+            private const val composeVersion = "2.8.7"
             const val runtimeKtx ="androidx.lifecycle:lifecycle-runtime-ktx:$version"
             const val viewModelKtx ="androidx.lifecycle:lifecycle-viewmodel-ktx:$version"
+            const val viewModelCompose = "androidx.lifecycle:lifecycle-viewmodel-compose-android:$composeVersion"
         }
         object Navigation {
             private const val version ="2.5.0"
@@ -94,6 +97,11 @@ object Libs{
         const val android = "com.google.dagger:hilt-android:$version"
         const val compiler = "com.google.dagger:hilt-compiler:$version"
         const val test = "com.google.dagger:hilt-android-testing:$version"
+        const val navigationCompose = "androidx.hilt:hilt-navigation-compose:1.2.0"
+    }
+    object Coil {
+        private const val version = "2.5.0"
+        const val compose = "io.coil-kt:coil-compose:$version"
     }
     object Glide {
         private const val version = "4.12.0"
