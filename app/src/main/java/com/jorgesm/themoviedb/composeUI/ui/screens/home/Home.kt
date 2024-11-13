@@ -1,11 +1,11 @@
 package com.jorgesm.themoviedb.composeUI.ui.screens.home
 
+import android.Manifest
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -17,6 +17,7 @@ import com.jorgesm.themoviedb.composeUI.ui.screens.MovieTopAppBar
 import com.jorgesm.themoviedb.composeUI.ui.screens.Screen
 import com.jorgesm.themoviedb.composeUI.ui.screens.common.ErrorText
 import com.jorgesm.themoviedb.composeUI.ui.screens.common.Loading
+import com.jorgesm.themoviedb.composeUI.ui.screens.common.PermissionRequestEffect
 import com.jorgesm.themoviedb.domain.DomainMovie
 import com.jorgesm.themoviedb.ui.main.MainViewModel
 
@@ -29,9 +30,10 @@ fun Home(
 ) {
     val state by vm.state.collectAsState()
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
-    LaunchedEffect(key1 = Unit) {
-            vm.onUiReady()
+    PermissionRequestEffect(permission = Manifest.permission.ACCESS_COARSE_LOCATION) {
+        vm.onUiReady()
     }
+
     Screen {
         Scaffold(
             topBar = {
