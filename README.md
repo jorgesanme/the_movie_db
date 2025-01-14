@@ -8,7 +8,7 @@ Pero si usted prefiere, al igual que yo, las  UI en **JetPack Compose**, lo pued
 
 ## Description
 Esta app muestra las Películas más populares en la zona donde se encuentre el dispositivo. Para localizar el mismo se usa el ServiceLocator, el cual necesita que el usuario conceda los permisos de localización.  
-Una vez descarga la lista de películas, se les muestra al usuario en un GripView. Desde aquí y con un click en cada imagen, se le presenta los detalles de la película donde se puede selecciónar las favoritas.  
+Una vez descargada la lista de películas, se les muestra al usuario en un GripView. Desde aquí y con un click en cada imagen, se le presenta los detalles de la película donde se puede selecciónar las favoritas.  
 Para conseguir este comportarmiento, se ha creado un **Single Source of Truth**. Descargando el listado desde la api y almacenandolo en una DDBB local (Room). Desde aquí es donde se inicia toda interacción con la UI, para mostar listado, detalles o marcar como favoritos.
 
 
@@ -16,7 +16,6 @@ Para conseguir este comportarmiento, se ha creado un **Single Source of Truth**.
 Se desea demostrar los conocimientos en la creación de apps que consuman datos desde un backEnd.  
 Para ello se ha diseñado una **Arquitectura Clean** usando los patrones **SOLID**.  
 Con respecto al patron de presentación, se ha optado por el  **MVVM**.  
-
 
 El proyecto se construye con una arquitectura por capas. Las mismas estan localizadas en diferentes modulos:
 * App
@@ -43,13 +42,13 @@ Quedando la siguiente estructura de modulos:
 <img src="https://github.com/jorgesanme/the_movie_db/blob/main/images/modules.png" width="160" height="160" />
   
 ### Images
-| Permisos | Load Data | Detalles |
+| Permisos | Cargo de Datos | Detalles |
 | --- | --- | --- |
 |<img src="https://github.com/jorgesanme/the_movie_db/blob/main/images/permission.gif" width="160" height="350" />|<img src="https://github.com/jorgesanme/the_movie_db/blob/main/images/start.gif" width="160" height="350" />|<img src="https://github.com/jorgesanme/the_movie_db/blob/main/images/details.gif" width="160" height="350" />|
 
 
 ### Librerias
-| Api call |DI| UI layer | Test|
+| **Api call** | **DI**| **UI layer**| **Test**|
 |---|---|---|---|
 | Coroutines | Hilt  | Room  | Junit4  |
 | OkHttp3    |Dagger2| Glide | Espresso|
