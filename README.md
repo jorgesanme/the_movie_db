@@ -43,9 +43,8 @@ Quedando la siguiente estructura de modulos:
 <img src="https://github.com/jorgesanme/the_movie_db/blob/main/images/modules.png" width="160" height="160" />
   
 ## IMAGEN
-
-<img src="https://github.com/jorgesanme/Compose_Marvel_Api/blob/main/images/op.gif" width="160" height="350" />|
-<img src="https://github.com/jorgesanme/Compose_Marvel_Api/blob/main/images/segund.gif" width="160" height="350" />|
-<img src="https://github.com/jorgesanme/Compose_Marvel_Api/blob/main/images/detall.gif" width="160" height="350" />|
+| Permisos | Load Data | Detalles |
+| --- | --- | --- |
+|<img src="https://github.com/jorgesanme/the_movie_db/blob/main/images/permission.gif" width="160" height="350" />|<img src="https://github.com/jorgesanme/the_movie_db/blob/main/images/start.gif" width="160" height="350" />|<img src="https://github.com/jorgesanme/the_movie_db/blob/main/images/details.gif" width="160" height="350" />|
 
 mucho bla bla bla
