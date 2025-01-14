@@ -3,7 +3,7 @@
 ## This proyect 
 
 Una app construida con **Kotlin** para consumir la Api de [The Movie DB](https://www.themoviedb.org/).  
-En esta rama puede encontrar las UI construida con las View Clasicas construidas con XML.  
+En esta rama puede encontrar las UI construida con las View Clasicas generadas con XML.  
 Pero si usted prefiere, al igual que yo, las  UI en **JetPack Compose**, lo puede encontrar en esta Branch [Compose](https://github.com/jorgesanme/the_movie_db/tree/ComposeUI) 
 
 ## Description
@@ -48,3 +48,11 @@ Quedando la siguiente estructura de modulos:
 |<img src="https://github.com/jorgesanme/the_movie_db/blob/main/images/permission.gif" width="160" height="350" />|<img src="https://github.com/jorgesanme/the_movie_db/blob/main/images/start.gif" width="160" height="350" />|<img src="https://github.com/jorgesanme/the_movie_db/blob/main/images/details.gif" width="160" height="350" />|
 
 
+### Librerias
+| Api call |DI| UI layer | Test|
+|---|---|---|---|
+| Coroutines | Hilt  | Room  | Junit4  |
+| OkHttp3    |Dagger2| Glide | Espresso|
+| Retrofit   | Koin  | Coil  | Mockito |
+| Arrow      |       |       | Turbine |
+| JavaX      |       |       |         |
