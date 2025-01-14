@@ -15,10 +15,35 @@ Para conseguir este comportarmiento, se ha creado un **Single Source of Truth**.
 ## PROYECT DESCRIPTION
 Se desea demostrar los conocimientos en la creación de apps que consuman datos desde un backEnd.  
 Para ello se ha diseñado una **Arquitectura Clean** usando los patrones **SOLID**.  
-Con respecto al patron de presentación, se ha optado por el  **MVVM**
-El proyecto se construye con una arquitectura por capas. Las mismas estan localizadas en 
+Con respecto al patron de presentación, se ha optado por el  **MVVM**.  
 
+
+El proyecto se construye con una arquitectura por capas. Las mismas estan localizadas en diferentes modulos:
+* App
+* data
+* domain
+* useCases
+  > Los más puristas prefieren 3 capas. Es mi preferencia separar los UseCases en un modulo 😏 😃
+
+### Injección de Dependencias
+  Se han realiado pruebas con las siguiente librerias de DI:
+  * [Dagger2](https://github.com/jorgesanme/the_movie_db/tree/DI_5-5_dagger2)
+  * [Koin](https://github.com/jorgesanme/the_movie_db/tree/DI_5-2_Koin)
+  * Hilt.  --> Siendo esta última la que se mergea a Main
+
+### Test
+  Se ha generado una batería de test usando JUnit4 y Mockito para los test de UI.  
+  Dado la división por modulos y la complejidad para testear, se han creado otros tres modulos con las siguientes funciones:
+  * appTestShared: --> Helper & Fake de los repositorios tanto local como remoto, LocationServise y permissionChecker
+  * buildSrc: --> Gestion de las dependencias y librerias. (obsoleto tras la creación de los libs.versions.toml)
+  * testShared: --> Mock de un objeto domain
+
+Quedando la siguiente estructura de modulos:
+
+<img src="https://github.com/jorgesanme/the_movie_db/blob/main/images/modules.png" width="160" height="160" />
+  
 ## IMAGEN
+
 <img src="https://github.com/jorgesanme/Compose_Marvel_Api/blob/main/images/op.gif" width="160" height="350" />|
 <img src="https://github.com/jorgesanme/Compose_Marvel_Api/blob/main/images/segund.gif" width="160" height="350" />|
 <img src="https://github.com/jorgesanme/Compose_Marvel_Api/blob/main/images/detall.gif" width="160" height="350" />|
