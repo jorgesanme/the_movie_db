@@ -1,6 +1,7 @@
 package com.jorgesm.themoviedb.ui.detail
 
 import androidx.lifecycle.SavedStateHandle
+import com.jorgesm.themoviedb.composeUI.ui.screens.NavArgs
 import com.jorgesm.themoviedb.di.MovieId
 import dagger.Module
 import dagger.Provides
@@ -14,6 +15,9 @@ class DetailViewModelModule {
     @Provides
     @ViewModelScoped
     @MovieId
-    fun provideMovieId(savedStateHandle: SavedStateHandle)=
-        DetailFragmentArgs.fromSavedStateHandle(savedStateHandle).movieId
+    fun provideMovieId(savedStateHandle: SavedStateHandle): Int {
+        val movieId = DetailFragmentArgs.fromSavedStateHandle(savedStateHandle).movieId
+        if (movieId> -1) return movieId
+        return savedStateHandle[NavArgs.ItemId.key] ?: -1
+    }
 }
