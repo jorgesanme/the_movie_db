@@ -48,7 +48,7 @@ Quedando la siguiente estructura de modulos:
 
 
 ### Librerias
-| **Api call** | **DI**| **UI layer**| **Test**|
+|  **_Api call_** | **_DI_**| **_UI layer_**| **_Test_**|
 |---|---|---|---|
 | Coroutines | Hilt  | Room  | Junit4  |
 | OkHttp3    |Dagger2| Glide | Espresso|
