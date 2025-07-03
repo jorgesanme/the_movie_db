@@ -2,13 +2,13 @@ package com.jorgesm.themoviedb.domain
 
 import com.jorgesm.themoviedb.data.database.Movie
 
-fun List<Movie>.toDomainModel(): List<DomainMovie> = map { it.toDomainModel() }
+fun List<Movie?>.toDomainModel(): List<DomainMovie> = filterNotNull().map { it.toDomainModel() }
 fun Movie.toDomainModel(): DomainMovie =
    DomainMovie(
       id = this.id,
       title = this.title,
       releaseDate = this.releaseDate,
-      posterPath = this.posterPath,
+      posterPath = this.posterPath ?: "",
       backdropPath = this.backdropPath ?: "",
       originalLanguage = this.originalLanguage,
       originalTitle = this.originalTitle,
@@ -23,7 +23,7 @@ fun DomainMovie.toDBModel(): Movie = Movie(
    id = this.id,
    title = this.title,
    releaseDate = this.releaseDate,
-   posterPath = this.posterPath,
+   posterPath = this.posterPath ?: "",
    backdropPath = this.backdropPath ?: "",
    originalLanguage =this.originalLanguage,
    originalTitle =this.originalTitle,

@@ -9,6 +9,7 @@ object Constants {
     const val IMG_BASE_URL = "https://image.tmdb.org/t/p/"
     const val IMG_780= "w780"
     const val IMG_185= "w185/"
-    
-    
+
+    const val SEARCH_BY_NAME = "search/movie"
+
 }

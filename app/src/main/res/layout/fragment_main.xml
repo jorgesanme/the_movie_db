@@ -63,7 +63,6 @@
         android:elevation="10dp"
         android:gravity="center"
         android:minLines="1"
-        android:maxLines="2"
         tools:text="Title"
         android:textSize="24dp"
         android:textColor="@color/black"

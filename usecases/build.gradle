@@ -13,6 +13,7 @@ dependencies {
     implementation Libs.Kotlin.Coroutines.core
     implementation Libs.Kotlin.Coroutines.test
     implementation Libs.JavaX.inject
+    implementation Libs.Arrow.core
 
     testImplementation project(":testShared")
     implementation Libs.Junit.junit

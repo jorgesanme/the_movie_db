@@ -1,10 +1,11 @@
 package com.jorgesm.themoviedb.data
 
+import arrow.core.Either
 import com.jorgesm.themoviedb.domain.DomainMovie
-import com.jorgesm.themoviedb.domain.Error
 import com.jorgesm.themoviedb.data.datasource.MovieLocalDataSource
 import com.jorgesm.themoviedb.data.datasource.MovieRemoteDataSource
 import javax.inject.Inject
+import com.jorgesm.themoviedb.domain.Error
 
 
 class MoviesRepository @Inject constructor(
@@ -25,8 +26,15 @@ class MoviesRepository @Inject constructor(
         }
         return null
     }
+
+    suspend fun findMovieByName(movieName: String): Either<Error, List<DomainMovie>> {
+        val region = regionRepository.findLasRegion()
+        val result=  remoteDataSource.findMovieByName(region, movieName)
+        result.fold(ifLeft = {}){localDataSource.save(it)}
+        return result
+    }
     
-    suspend fun switchFavorite(movie: DomainMovie): Error?  {
+    suspend fun switchFavorite(movie: DomainMovie): Error? {
             val updateMovie = movie.copy(isFavorite = !movie.isFavorite)
             return localDataSource.save(listOf(updateMovie))
         }

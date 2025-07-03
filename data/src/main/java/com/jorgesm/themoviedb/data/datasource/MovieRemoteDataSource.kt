@@ -6,5 +6,5 @@ import com.jorgesm.themoviedb.domain.Error
 
 interface MovieRemoteDataSource{
     suspend fun findPopularMovies( region: String): Either<Error, List<DomainMovie>>
-    
+    suspend fun findMovieByName(region: String, movieName: String): Either<Error, List<DomainMovie>>
 }

@@ -17,12 +17,24 @@ class MovieServerDataSource @Inject constructor(
                 .listPopularMovies(apiKey, region)
                 .results.map { it.mapToDomainModel() }
         }
-    
+
+    override suspend fun findMovieByName(
+        region: String,
+        movieName: String
+    ): Either<Error, List<DomainMovie>> =
+        tryCall {
+            remoteService
+                .getMovieByName(apiKey=apiKey, region = region, movieName = movieName )
+                .results.filterNotNull().map { it.mapToDomainModel() }
+        }
+
+
+
     private fun RemoteMovie.mapToDomainModel() = DomainMovie(
         id = this.id,
         title = this.title,
         releaseDate = this.releaseDate,
-        posterPath = this.posterPath,
+        posterPath = this.posterPath ?: "",
         backdropPath = this.backdropPath ?: "",
         originalLanguage = this.originalLanguage,
         originalTitle = this.originalTitle,
