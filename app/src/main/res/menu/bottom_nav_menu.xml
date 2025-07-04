@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+      <item
+            android:id="@+id/main_dest"
+            android:icon="@drawable/menu_main_movies"
+            android:title="@string/popular_movies" />
+        <item
+            android:id="@+id/filter_by_name"
+            android:icon="@drawable/menu_movie_by_name"
+            android:title="@string/filter_movies_by_name" />
+        <item
+            android:id="@+id/filter_by_genres"
+            android:icon="@drawable/menu_movie_filter"
+            android:title="@string/filter_movies_by_genres" />
+</menu>

@@ -27,7 +27,11 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             rvCovers.adapter = adapter
         }
         mainState.requestLocationPermission { viewModel.onUiReady() }
+        setupToolbar()
         setupObservable()
+    }
+    private fun setupToolbar(){
+        mainBinding.movieDetailToolbar.title = getString(R.string.popular_movies_title)
     }
     
     private fun setupObservable() {
