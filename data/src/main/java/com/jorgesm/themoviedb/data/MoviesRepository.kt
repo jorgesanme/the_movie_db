@@ -4,6 +4,7 @@ import arrow.core.Either
 import com.jorgesm.themoviedb.domain.DomainMovie
 import com.jorgesm.themoviedb.data.datasource.MovieLocalDataSource
 import com.jorgesm.themoviedb.data.datasource.MovieRemoteDataSource
+import com.jorgesm.themoviedb.domain.DomainGenres
 import javax.inject.Inject
 import com.jorgesm.themoviedb.domain.Error
 
@@ -37,4 +38,11 @@ class MoviesRepository @Inject constructor(
             val updateMovie = movie.copy(isFavorite = !movie.isFavorite)
             return localDataSource.save(listOf(updateMovie))
         }
+
+    suspend fun getListOfGenres():  Either<Error, DomainGenres>{
+        val region = regionRepository.findLasRegion()
+        val result = remoteDataSource.getListOfGenres(region)
+        return result
+
+    }
 }
