@@ -13,4 +13,8 @@
     <string name="filter_by_genres_title">Filter by Genres</string>
     <string name="filter_by_name_title">Filter by Name</string>
     <string name="popular_movies_title">Filtered by Popular</string>
+    <string name="input_text_filter_by_movie_hint">Movie Title</string>
+    <string name="dialog_search_movie_by_title">Search movie by Title</string>
+    <string name="button_search">Search</string>
+    <string name="button_cancel">Cancel</string>
 </resources>

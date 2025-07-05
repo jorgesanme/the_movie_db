@@ -30,7 +30,6 @@ class MoviesRepository @Inject constructor(
     suspend fun findMovieByName(movieName: String): Either<Error, List<DomainMovie>> {
         val region = regionRepository.findLasRegion()
         val result=  remoteDataSource.findMovieByName(region, movieName)
-        result.fold(ifLeft = {}){localDataSource.save(it)}
         return result
     }
     

@@ -1,6 +1,7 @@
 package com.jorgesm.themoviedb.utils
 
 import android.content.Context
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -64,3 +65,5 @@ val Context.app: App
 
 val Fragment.app: App
     get() = requireContext().app
+
+fun Int.dpToPx() = (this * Resources.getSystem().displayMetrics.density).toInt()
