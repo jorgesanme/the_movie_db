@@ -32,7 +32,7 @@ class GenresFragment : Fragment(R.layout.fragment_genres) {
         super.onViewCreated(view, savedInstanceState)
         mainState = buildMainState()
         mainBinding = FragmentGenresBinding.bind(view).apply {
-//            rvCovers.adapter = adapter
+            rvCovers.adapter = adapter
         }
         context = mainBinding.root.context
         mainState.requestLocationPermission { viewModel.onUiReady() }
@@ -61,14 +61,11 @@ class GenresFragment : Fragment(R.layout.fragment_genres) {
 
     private fun setupDropdown(genres: List<DomainGenre>) {
         val spinner = mainBinding.movieFilterSpinner
-
         val options = genres.map { it.name }
-
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, options)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
         spinner.adapter = adapter
-
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>,
@@ -77,15 +74,13 @@ class GenresFragment : Fragment(R.layout.fragment_genres) {
                 id: Long
             ) {
                 val selected = options[position]
-                // Aquí llamar al get list of movie by genre
-                viewModel.getListByGenre()
+                val genreId = genres.firstOrNull { it.name == selected }?.id
+                genreId?.let { genre ->
+                    viewModel.getListByGenre(genre.toString())
+                }
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>) {
-                // Nada seleccionado
-            }
+            override fun onNothingSelected(parent: AdapterView<*>) {}
         }
-
-
     }
 }

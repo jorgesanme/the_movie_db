@@ -19,6 +19,12 @@ class MovieServerDataSource @Inject constructor(
                 .results.map { it.mapToDomainModel() }
         }
 
+    override suspend fun getMovieDetails(region: String,movieId: Int): Either<Error, DomainMovie> =
+        tryCall {
+            remoteService.getMovieDetails(movieId,apiKey,region).mapToDomainModel()
+        }
+
+
     override suspend fun findMovieByName(
         region: String,
         movieName: String
@@ -28,6 +34,17 @@ class MovieServerDataSource @Inject constructor(
                 .getMovieByName(apiKey = apiKey, region = region, movieName = movieName)
                 .results.filterNotNull().map { it.mapToDomainModel() }
         }
+
+    override suspend fun filterMovieByGenres(
+        region: String,
+        genres: String
+    ): Either<Error, List<DomainMovie>> =
+        tryCall {
+            remoteService
+                .getMoviesFilterByGenre(apiKey, region, genres)
+                .results.map { it.mapToDomainModel() }
+        }
+
 
     override suspend fun getListOfGenres(region: String): Either<Error, DomainGenres> =
         tryCall {
