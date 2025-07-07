@@ -23,6 +23,34 @@ fun List<Genre>.mapToDomainGenres() = DomainGenres(
 )
 
 fun Genre.mapToDomainGenre() = DomainGenre(
-    id= this.id,
-    name= this.name
+    id = this.id ,
+    name = this.name
+)
+
+/*fun MovieDetails.mapToDomainModel() = DomainMovie(
+    id = this.id,
+    title = this.title,
+    releaseDate = this.releaseDate,
+    posterPath = this.posterPath ?: "",
+    backdropPath = this.backdropPath ?: "",
+    originalLanguage = this.originalLanguage,
+    originalTitle = this.originalTitle,
+    overview = this.overview,
+    popularity = this.popularity,
+    voteAverage = this.voteAverage.toDouble(),
+    isFavorite = false
+)*/
+
+fun MovieDetails.mapToDomain() = DomainMovie(
+    id = this.id ?: 0,
+    title = this.title ?: "",
+    releaseDate = this.releaseDate?: "",
+    posterPath = this.posterPath,
+    backdropPath = this.backdropPath,
+    originalLanguage = this.originalLanguage ?: "",
+    originalTitle = this.originalTitle ?: "" ,
+    overview = this.overview?: "",
+    popularity = this.popularity ?: 0.0,
+    voteAverage = this.voteAverage?: 0.0 ,
+    isFavorite = false
 )

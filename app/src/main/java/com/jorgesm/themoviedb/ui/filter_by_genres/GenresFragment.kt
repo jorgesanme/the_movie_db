@@ -25,7 +25,7 @@ class GenresFragment : Fragment(R.layout.fragment_genres) {
     private lateinit var context: Context
 
     private val viewModel: GenderViewModel by viewModels()
-    private val adapter = MoviesAdapter { mainState.onMovieClickedFromMain(it.id) }
+    private val adapter = MoviesAdapter { mainState.onMovieClickedFromFilterByGenres(it.id) }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

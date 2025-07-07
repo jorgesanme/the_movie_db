@@ -21,7 +21,7 @@ class MovieServerDataSource @Inject constructor(
 
     override suspend fun getMovieDetails(region: String,movieId: Int): Either<Error, DomainMovie> =
         tryCall {
-            remoteService.getMovieDetails(movieId,apiKey,region).mapToDomainModel()
+            remoteService.getMovieDetails(movieId,apiKey,region).mapToDomain()
         }
 
 

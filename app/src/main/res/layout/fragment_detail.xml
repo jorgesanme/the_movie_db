@@ -52,6 +52,18 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:transitionGroup="true">
+            <TextView
+                android:id="@+id/error_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="10dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:minLines="1"
+                android:textColor="@color/black"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                tools:text="Title" />
 
             <ImageView
                 android:id="@+id/movie_detail_favorite"
