@@ -41,16 +41,16 @@ fun Genre.mapToDomainGenre() = DomainGenre(
     isFavorite = false
 )*/
 
-fun MovieDetails.mapToDomain() = DomainMovie(
+fun RemoteMovieDetails.mapToDomain() = DomainMovie(
     id = this.id ?: 0,
     title = this.title ?: "",
-    releaseDate = this.releaseDate?: "",
+    releaseDate = this.releaseDate,
     posterPath = this.posterPath,
     backdropPath = this.backdropPath,
     originalLanguage = this.originalLanguage ?: "",
     originalTitle = this.originalTitle ?: "" ,
     overview = this.overview?: "",
     popularity = this.popularity ?: 0.0,
-    voteAverage = this.voteAverage?: 0.0 ,
+    voteAverage = this.voteAverage,
     isFavorite = false
 )

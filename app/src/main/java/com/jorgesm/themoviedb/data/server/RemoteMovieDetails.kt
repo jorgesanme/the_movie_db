@@ -2,7 +2,7 @@ package com.jorgesm.themoviedb.data.server
 
 import com.google.gson.annotations.SerializedName
 
-data class MovieDetails(
+data class RemoteMovieDetails(
     var adult: Boolean?,
     @SerializedName("backdrop_path")
     var backdropPath: String?,

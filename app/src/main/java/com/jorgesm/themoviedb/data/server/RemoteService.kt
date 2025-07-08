@@ -38,7 +38,7 @@ interface RemoteService {
         @Path("movie_id") movieId: Int,
         @Query("api_key") apiKey: String,
         @Query("region") region: String
-    ): MovieDetails
+    ): RemoteMovieDetails
 
     @GET(Constants.GET_MOVIES_FILTER_BY_GENRE)
     @Headers("Content-Type: application/json")
@@ -48,8 +48,4 @@ interface RemoteService {
         @Query("with_genres") genres: String
     ): RemoteResult
 
-
-
 }
-//https://api.themoviedb.org/3/movie/movie_id?language=en-US")
-//https://api.themoviedb.org/3/movie/{movie_id}
