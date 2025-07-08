@@ -7,7 +7,7 @@ import com.jorgesm.themoviedb.appTestShared.buildRemoteMovies
 import com.jorgesm.themoviedb.appTestShared.buildRepositoryWith
 import com.jorgesm.themoviedb.data.database.Movie as DatabaseMovie
 import com.jorgesm.themoviedb.data.server.RemoteMovie
-import com.jorgesm.themoviedb.ui.main.MainViewModel.UiState
+import com.jorgesm.themoviedb.ui.common.UiState
 import com.jorgesm.themoviedb.usecases.GetPopularMoviesUseCase
 import com.jorgesm.themoviedb.usecases.RequestPopularMoviesUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
