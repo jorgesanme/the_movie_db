@@ -1,8 +1,20 @@
 <resources>
     <string name="app_name">The Movie db</string>
+
     <string name="api_key">f619ebb09bf1b44a82e6b13dfdc9ad50</string>
     <string name="talk_back_movie_poster">Cartel de la peli</string>
     <string name="connectivity_error">Ha fallado la conección a internet</string>
     <string name="server_error">Error en el servidor:</string>
     <string name="unknown_error">No lo entiendo, pero dice -></string>
+    <string name="popular_movies">Popular</string>
+    <string name="filter_movies_by_genres">Generos</string>
+    <string name="filter_movies_by_name">Nombres</string>
+
+    <string name="filter_by_genres_title">Filter by Genres</string>
+    <string name="filter_by_name_title">Filter by Name</string>
+    <string name="popular_movies_title">Filtered by Popular</string>
+    <string name="input_text_filter_by_movie_hint">Movie Title</string>
+    <string name="dialog_search_movie_by_title">Search movie by Title</string>
+    <string name="button_search">Search</string>
+    <string name="button_cancel">Cancel</string>
 </resources>

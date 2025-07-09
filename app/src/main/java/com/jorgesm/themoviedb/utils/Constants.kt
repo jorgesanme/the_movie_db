@@ -9,6 +9,10 @@ object Constants {
     const val IMG_BASE_URL = "https://image.tmdb.org/t/p/"
     const val IMG_780= "w780"
     const val IMG_185= "w185/"
-    
-    
+
+    const val SEARCH_BY_NAME_END_POINT = "search/movie"
+    const val GET_GENRES_LIST_END_POINT = "genre/movie/list"
+    const val GET_MOVIE_DETAIL_END_POINT = "movie/{movie_id}"
+    const val GET_MOVIES_FILTER_BY_GENRE = "discover/movie"
+
 }

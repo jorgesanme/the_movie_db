@@ -9,4 +9,5 @@ java {
 }
 dependencies{
     implementation project(":domain")
+    implementation project(":usecases")
 }

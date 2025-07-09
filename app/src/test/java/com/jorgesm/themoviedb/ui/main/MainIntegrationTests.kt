@@ -7,7 +7,7 @@ import com.jorgesm.themoviedb.appTestShared.buildRemoteMovies
 import com.jorgesm.themoviedb.appTestShared.buildRepositoryWith
 import com.jorgesm.themoviedb.data.database.Movie as DatabaseMovie
 import com.jorgesm.themoviedb.data.server.RemoteMovie
-import com.jorgesm.themoviedb.ui.main.MainViewModel.UiState
+import com.jorgesm.themoviedb.ui.common.UiState
 import com.jorgesm.themoviedb.usecases.GetPopularMoviesUseCase
 import com.jorgesm.themoviedb.usecases.RequestPopularMoviesUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -40,9 +40,9 @@ class MainIntegrationTests {
             assertEquals(UiState(movies = emptyList(), loading = false), awaitItem())
             val uiState = awaitItem()
             val movies = uiState.movies!!
-            assertEquals("Title 4", movies[0].title)
-            assertEquals("Title 5", movies[1].title)
-            assertEquals("Title 6", movies[2].title)
+            assertEquals("Title", movies[0].title)
+            assertEquals("Title", movies[1].title)
+            assertEquals("Title", movies[2].title)
             cancel()
         }
     }

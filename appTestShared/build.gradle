@@ -34,5 +34,8 @@ dependencies {
 
     implementation project(":app")
     implementation project(':data')
+    implementation project(':usecases')
+    implementation project(':domain')
     implementation Libs.Kotlin.Coroutines.core
+    implementation Libs.Arrow.core
 }

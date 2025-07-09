@@ -3,8 +3,7 @@ package com.jorgesm.themoviedb.ui.main
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jorgesm.themoviedb.data.server.toError
-import com.jorgesm.themoviedb.domain.DomainMovie
-import com.jorgesm.themoviedb.domain.Error
+import com.jorgesm.themoviedb.ui.common.UiState
 import com.jorgesm.themoviedb.usecases.GetPopularMoviesUseCase
 import com.jorgesm.themoviedb.usecases.RequestPopularMoviesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,32 +19,33 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val getPopularMoviesUseCase: GetPopularMoviesUseCase,
     private val requestPopularMoviesUseCase: RequestPopularMoviesUseCase
-): ViewModel() {
+) : ViewModel() {
 
     private val _state = MutableStateFlow(UiState())
     val state: StateFlow<UiState> = _state.asStateFlow()
+
     init {
         viewModelScope.launch {
             getPopularMoviesUseCase()
-                .catch { cause -> _state.update { it.copy( loading = false,error = cause.toError()) }}
-                .collect{ movies -> _state.update {  UiState(loading = false, movies = movies) }
-            }
+                .catch { cause ->
+                    _state.update {
+                        it.copy(
+                            loading = false,
+                            error = cause.toError()
+                        )
+                    }
+                }
+                .collect { movies ->
+                    _state.update { UiState(loading = false, movies = movies) }
+                }
         }
     }
-    
-    
-    fun onUiReady(){
+
+    fun onUiReady() {
         viewModelScope.launch {
             _state.value = _state.value.copy(loading = true)
             val error = requestPopularMoviesUseCase()
-            _state.value = _state.value.copy( loading = false, error = error)
+            _state.value = _state.value.copy(loading = false, error = error)
         }
     }
-    
-    
-    data class UiState(
-        val loading: Boolean = false,
-        val movies: List<DomainMovie>? = null,
-        val error: Error? = null
-    )
 }

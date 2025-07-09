@@ -7,12 +7,13 @@ import com.jorgesm.themoviedb.domain.Error
 import com.jorgesm.themoviedb.domain.toDBModel
 import com.jorgesm.themoviedb.domain.toDomainModel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class MovieRoomDataSource @Inject constructor(private val movieDao: MovieDao) : MovieLocalDataSource {
     
-    override val movies: Flow<List<DomainMovie>> = movieDao.getAllMovies().map { it.toDomainModel() }
+    override val movies: Flow<List<DomainMovie>> = movieDao.getAllMovies().filterNotNull().map { it.toDomainModel() }
     override suspend fun isEmpty(): Boolean =  movieDao.countMovies() == 0
     
     override fun findMovieById(id: Int): Flow<DomainMovie> = movieDao.findMovieById(id).map { it.toDomainModel() }

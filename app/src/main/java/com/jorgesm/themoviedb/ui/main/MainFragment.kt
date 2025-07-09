@@ -17,7 +17,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     private lateinit var mainState: MainState
     
     private val viewModel: MainViewModel by viewModels()
-    private val adapter = MoviesAdapter{ mainState.onMovieClicked(it) }
+    private val adapter = MoviesAdapter{ mainState.onMovieClickedFromMain(it.id) }
     
     
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -27,7 +27,11 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             rvCovers.adapter = adapter
         }
         mainState.requestLocationPermission { viewModel.onUiReady() }
+        setupToolbar()
         setupObservable()
+    }
+    private fun setupToolbar(){
+        mainBinding.movieDetailToolbar.title = getString(R.string.popular_movies_title)
     }
     
     private fun setupObservable() {

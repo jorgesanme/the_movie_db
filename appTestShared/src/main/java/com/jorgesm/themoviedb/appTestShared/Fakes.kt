@@ -5,6 +5,8 @@ import com.jorgesm.themoviedb.data.PermissionChecker
 import com.jorgesm.themoviedb.data.database.Movie
 import com.jorgesm.themoviedb.data.database.MovieDao
 import com.jorgesm.themoviedb.data.datasource.LocationDataSource
+import com.jorgesm.themoviedb.data.server.Genre
+import com.jorgesm.themoviedb.data.server.RemoteGenres
 import com.jorgesm.themoviedb.data.server.RemoteMovie
 import com.jorgesm.themoviedb.data.server.RemoteResult
 import com.jorgesm.themoviedb.data.server.RemoteService
@@ -44,7 +46,34 @@ class FakeRemoteService(
     override suspend fun listPopularMovies(apiKey: String, region: String) = RemoteResult(
         1, movies, 1, movies.size
         )
-    
+
+    override suspend fun getMovieByName(
+        apiKey: String,
+        region: String,
+        movieName: String
+    )= RemoteResult(
+        1, movies, 1, movies.size
+    )
+
+    override suspend fun getMovieGenres(apiKey: String, region: String): RemoteGenres {
+      return RemoteGenres(listOf<Genre>())
+    }
+
+    override suspend fun getMovieDetails(
+        movieId: Int,
+        apiKey: String,
+        region: String
+    )=  buildRemoteMovieDetails(movieId)
+
+
+    override suspend fun getMoviesFilterByGenre(
+        apiKey: String,
+        region: String,
+        genres: String
+    )= RemoteResult(
+        1, movies, 1, movies.size
+    )
+
 }
 
 class FakeLocationDataSource : LocationDataSource {

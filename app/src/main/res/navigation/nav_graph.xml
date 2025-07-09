@@ -8,11 +8,38 @@
     <fragment
         android:id="@+id/main_dest"
         android:name="com.jorgesm.themoviedb.ui.main.MainFragment"
-
         android:label="fragment_main"
         tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_main_to_detail"
+            app:destination="@id/detail_dest"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/filter_by_genres"
+        android:name="com.jorgesm.themoviedb.ui.filter_by_genres.GenresFragment"
+        android:label="fragment_genres"
+        tools:layout="@layout/fragment_genres">
+        <action
+            android:id="@+id/action_genres_to_detail"
+            app:destination="@id/detail_dest"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/filter_by_name"
+        android:name="com.jorgesm.themoviedb.ui.filter_by_name.FilterByNameFragment"
+        android:label="fragment_by_name"
+        tools:layout="@layout/fragment_by_name">
+        <action
+            android:id="@+id/action_by_name_to_detail"
             app:destination="@id/detail_dest"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
