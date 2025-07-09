@@ -81,11 +81,14 @@ dependencies {
     testImplementation project(":testShared")
     testImplementation project(":appTestShared")
 
+
     testImplementation Libs.Junit.junit
     testImplementation Libs.Mockito.kotlin
     testImplementation Libs.Mockito.inline
     testImplementation Libs.Kotlin.Coroutines.test
     testImplementation Libs.turbine
+    testImplementation "com.google.truth:truth:1.4.4"
+    testImplementation "androidx.arch.core:core-testing:2.2.0"
 
 
     androidTestImplementation project(":appTestShared")

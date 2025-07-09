@@ -8,7 +8,9 @@ import com.jorgesm.themoviedb.data.database.Movie as DatabaseMovie
 import com.jorgesm.themoviedb.ui.detail.DetailViewModel.UiState
 import com.jorgesm.themoviedb.appTestShared.buildDatabaseMovies
 import com.jorgesm.themoviedb.appTestShared.buildRepositoryWith
+import com.jorgesm.themoviedb.appTestShared.buildViewModelForTest
 import com.jorgesm.themoviedb.usecases.GetMovieByIdUseCase
+import com.jorgesm.themoviedb.usecases.GetRemoteMovieDetailsUseCase
 import com.jorgesm.themoviedb.usecases.SetMovieFavoriteUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
@@ -51,16 +53,5 @@ class DetailIntegrationTest {
         }
     }
     
-    private fun buildViewModelForTest(
-        movieId: Int,
-        localData: List<DatabaseMovie> = emptyList(),
-        remoteData: List<RemoteMovie> = emptyList(),
-    ): DetailViewModel {
-        val moviesRepository = buildRepositoryWith(localData, remoteData)
-        
-        val getMovieByIdUseCase = GetMovieByIdUseCase(moviesRepository)
-        val setMovieFavoriteUseCase = SetMovieFavoriteUseCase(moviesRepository)
-        
-        return DetailViewModel(movieId, getMovieByIdUseCase, setMovieFavoriteUseCase)
-    }
+
 }
