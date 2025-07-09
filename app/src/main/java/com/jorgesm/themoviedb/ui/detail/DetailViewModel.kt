@@ -28,23 +28,41 @@ class DetailViewModel @Inject constructor(
     val state: StateFlow<UiState> = _state.asStateFlow()
 
     init {
+       initMovieDetails()
+    }
+    private fun initMovieDetails(){
         viewModelScope.launch {
             getRemoteMovieDetailsUseCase(movieId).fold(ifLeft = { error ->
-                _state.update { UiState(error = error) }
+                _state.update { UiState(error = error, movie = null) }
             }, ifRight = { movie ->
-                _state.update { UiState(error = null, movie = movie) }
+                _state.update { UiState(movie = movie) }
             })
         }
     }
+
+
+    fun switchFavorite() {
+        val current = _state.value
+        val newIsFavorite = current.movie?.isFavorite
+        newIsFavorite?.let { it
+        val updatedMovie = current.movie.copy(isFavorite = !it)
+        _state.value = current.copy(movie = updatedMovie)
+        }
+    }
+
+
+    fun onFavoriteClicked() {
+        viewModelScope.launch {
+            _state.value.movie?.let {
+                setMovieFavoriteUseCase(it.copy(isFavorite = !it.isFavorite))
+            }
+        }
+    }
+
 
     data class UiState(
         val error: Error? = null,
         val movie: DomainMovie? = null
     )
 
-    fun onFavoriteClicked() = viewModelScope.launch {
-        _state.value.movie?.let {
-            setMovieFavoriteUseCase(it)
-        }
-    }
 }
