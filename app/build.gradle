@@ -89,6 +89,7 @@ dependencies {
     testImplementation Libs.turbine
     testImplementation "com.google.truth:truth:1.4.4"
     testImplementation "androidx.arch.core:core-testing:2.2.0"
+    testImplementation(Libs.Hilt.test)
 
 
     androidTestImplementation project(":appTestShared")

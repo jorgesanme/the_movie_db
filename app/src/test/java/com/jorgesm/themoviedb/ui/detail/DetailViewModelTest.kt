@@ -1,4 +1,6 @@
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule // Necesario para StateFlow/LiveData
+package com.jorgesm.themoviedb.ui.detail
+
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import app.cash.turbine.test
 import arrow.core.left
 import arrow.core.right
@@ -6,7 +8,6 @@ import com.google.common.truth.Truth.assertThat
 import com.jorgesm.themoviedb.CoroutinesTestRule
 import com.jorgesm.themoviedb.domain.Error
 import com.jorgesm.themoviedb.testshared.sampleMovieTest
-import com.jorgesm.themoviedb.ui.detail.DetailViewModel
 import com.jorgesm.themoviedb.usecases.GetMovieByIdUseCase
 import com.jorgesm.themoviedb.usecases.GetRemoteMovieDetailsUseCase
 import com.jorgesm.themoviedb.usecases.SetMovieFavoriteUseCase
@@ -31,7 +32,7 @@ class DetailViewModelTest {
     val coroutinesTestRule = CoroutinesTestRule()
 
     @Mock
-    private lateinit var getMovieByIdUseCase: GetMovieByIdUseCase // Aunque no se usa directamente en init, es parte del constructor
+    private lateinit var getMovieByIdUseCase: GetMovieByIdUseCase
 
     @Mock
     private lateinit var getRemoteMovieDetailsUseCase: GetRemoteMovieDetailsUseCase
@@ -55,7 +56,7 @@ class DetailViewModelTest {
         // WHEN: Creamos la instancia del ViewModel, lo que disparará el bloque init.
         viewModel = DetailViewModel(
             movieId = testMovieId,
-            getMovieByIdUseCase = getMovieByIdUseCase, // Se pasa aunque no se use en init
+            getMovieByIdUseCase = getMovieByIdUseCase,
             getRemoteMovieDetailsUseCase = getRemoteMovieDetailsUseCase,
             setMovieFavoriteUseCase = setMovieFavoriteUseCase
         )
@@ -127,7 +128,7 @@ class DetailViewModelTest {
         // Consumimos el estado inicial y el de carga para llegar al estado con la película
         viewModel.state.test {
             awaitItem() // Estado inicial
-            val loadedState = awaitItem() // Estado con la película cargada
+            val loadedState = awaitItem()
             assertThat(loadedState.movie).isEqualTo(initialMovie)
 
             // WHEN: Llamamos a switchFavorite.
@@ -154,7 +155,7 @@ class DetailViewModelTest {
         // GIVEN: Establecemos un estado inicial con una película.
         val initialMovie = movieSample.copy(isFavorite = false)
         val expectedMovieToSave =
-            initialMovie.copy(isFavorite = true) // La película con el favorito invertido
+            initialMovie.copy(isFavorite = true)
 
         // Simulamos que la película ya se cargó exitosamente.
         whenever(getRemoteMovieDetailsUseCase(testMovieId)).thenReturn(initialMovie.right())
@@ -171,7 +172,9 @@ class DetailViewModelTest {
             awaitItem()
             val loadedState = awaitItem()
             assertThat(loadedState.movie).isEqualTo(initialMovie)
-
+    //cambiamos el valor de isFavorite a true y llamamos a onFavoriteClicked
+            viewModel.switchFavorite()
+            assertThat(awaitItem().movie?.isFavorite).isEqualTo(expectedMovieToSave.isFavorite)
             viewModel.onFavoriteClicked()
         }
     }
