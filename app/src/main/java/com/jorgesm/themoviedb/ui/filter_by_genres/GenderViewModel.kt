@@ -34,14 +34,7 @@ class GenderViewModel @Inject constructor(
             getFilteredMoviesByGenresUseCase(genre)
                 .fold(
                     ifLeft = { error ->
-
-                        _state.update {
-                            it.copy(
-                                loading = false,
-                                error = error,
-                                movies = null
-                            )
-                        }
+                        _state.update { it.copy(loading = false, error = error,movies = null ) }
                     },
                     ifRight = { movies ->
                         _state.update { UiState(loading = false, movies = movies) }
@@ -54,7 +47,9 @@ class GenderViewModel @Inject constructor(
         viewModelScope.launch {
             val result = getListOfGenresUseCase()
             result.fold(
-                ifLeft = {},
+                ifLeft = {error ->
+                    _state.update { it.copy(loading = false, error = error, movies = emptyList()) }
+                },
                 ifRight = { genres ->
                     _genres.value = genres.genres
                 }

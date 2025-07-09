@@ -8,8 +8,8 @@ import com.jorgesm.themoviedb.data.server.RemoteMovie
 import com.jorgesm.themoviedb.data.server.RemoteMovieDetails
 import com.jorgesm.themoviedb.ui.detail.DetailViewModel
 import com.jorgesm.themoviedb.data.database.Movie as DatabaseMovie
-import com.jorgesm.themoviedb.appTestShared.buildRepositoryWith
-import com.jorgesm.themoviedb.data.server.mapToDomainModel
+import com.jorgesm.themoviedb.domain.DomainGenre
+import com.jorgesm.themoviedb.domain.DomainGenres
 import com.jorgesm.themoviedb.domain.DomainMovie
 import com.jorgesm.themoviedb.usecases.GetMovieByIdUseCase
 import com.jorgesm.themoviedb.usecases.GetRemoteMovieDetailsUseCase
@@ -108,6 +108,19 @@ fun buildRemoteMovieDetails(id: Int) =
         voteCount = id
     )
 
+fun fakeDomainGenre(
+    id: Int = 1,
+    name: String = "Action"
+) = DomainGenre(id = id, name = name)
+
+fun fakeDomainGenreList(
+      genres: List<DomainGenre> = listOf(
+        fakeDomainGenre(1, "Action"),
+        fakeDomainGenre(2, "Comedy"),
+        fakeDomainGenre(3, "Drama")
+    )
+) = DomainGenres(genres)
+
 fun buildViewModelForTest(
     movieId: Int,
     localData: List<DatabaseMovie> = emptyList(),
@@ -119,7 +132,6 @@ fun buildViewModelForTest(
     val setMovieFavoriteUseCase = SetMovieFavoriteUseCase(moviesRepository)
     val getRemoteMovieDetailsUseCase = GetRemoteMovieDetailsUseCase(moviesRepository)
 
-
     return DetailViewModel(
         movieId,
         getMovieByIdUseCase,
@@ -128,21 +140,6 @@ fun buildViewModelForTest(
     )
 }
 
-fun buildViewModelForTest(
-    movieId: Int,
-    localData: List<DatabaseMovie> = emptyList(),
-    remoteData: List<RemoteMovie> = emptyList(),
-    setFavorite: suspend (DomainMovie) -> Unit = {}
-): DetailViewModel {
-    val moviesRepository = buildRepositoryWith(localData, remoteData)
 
-    val getMovieByIdUseCase = GetMovieByIdUseCase(moviesRepository)
-    val setMovieFavoriteUseCase = SetMovieFavoriteUseCase(moviesRepository)
-    val getRemoteMovieDetailsUseCase = GetRemoteMovieDetailsUseCase(moviesRepository)
-    return DetailViewModel(
-        movieId = movieId,
-        getMovieByIdUseCase = getMovieByIdUseCase,
-        getRemoteMovieDetailsUseCase = getRemoteMovieDetailsUseCase,
-        setMovieFavoriteUseCase = setMovieFavoriteUseCase
-    )
-}
+
+
